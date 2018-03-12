@@ -1,0 +1,19 @@
+{
+    "dev": {
+        "aws_region": "us-east-2",
+        "django_settings": "mysite.settings",
+        "profile_name": "rji",
+        "project_name": "fact-checker",
+        "runtime": "python3.6",
+        "s3_bucket": "zappa-fact-checker",
+        "certificate_arn": "arn:aws:acm:us-east-1:796077402566:certificate/796de356-f2c5-4b8e-a783-4bb1f9020d24",
+        "domain": "factchecker.rjifuture.org",
+        "exclude": [
+            "ipython*", "IPython", "ipdb*", "awscli*", "boto*", "jedi*",
+            "appnope*", "parso*", "pexpect*", "ptyprocess*",
+            "pickleshare*", "prompt-toolkit*", "wcwidth*", "pygments*",
+            "simplegeneric*", "traitlets*", "colorama*", "settings_local.py",
+            "sqlite.db", ".python-version", "requirements-dev.txt", "README.md"
+        ],
+    }
+}
