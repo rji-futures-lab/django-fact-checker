@@ -3,10 +3,6 @@
 
 
 sys-env:
-	# As explained here: http://www.firstpythonnotebook.org/prerequisites/compiler.html#mac-osx
-	# This one will open a couple of OS pop-ups. You need to select "Install" and accepts the terms.
-	xcode-select --install
-	
 	# install homebrew, the unofficial package manager for Macs
 	# from https://brew.sh/
 	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
