@@ -1,4 +1,5 @@
 from django.contrib import admin
+from markdownx.admin import MarkdownxModelAdmin
 from .models import (
     Claim,
     ClaimRating,
@@ -40,7 +41,6 @@ class ClaimRatingAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(ClaimReview)
 class ClaimReviewAdmin(admin.ModelAdmin):
     """
     Custom admin for managing ClaimReview instances.
@@ -55,7 +55,7 @@ class ClaimReviewAdmin(admin.ModelAdmin):
         'last_modified_by',
         'last_modified_at',
     )
-
+admin.site.register(ClaimReview, MarkdownxModelAdmin)
 
 @admin.register(ClaimSource)
 class ClaimSourceAdmin(admin.ModelAdmin):

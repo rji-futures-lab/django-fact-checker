@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'storages',
     'zappa_django_utils',
+    'markdownx',
+    'markdown_deux',
     'factchecker',
 ]
 

@@ -1,0 +1,11 @@
+{% if claim_review_list %}
+    <ul>
+    {% for cr in claim_review_list %}
+        <li>
+            <a href="{% url 'factchecker:detail' cr.id %}">{{ cr.claim }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No reviewed claims available.</p>
+{% endif %}

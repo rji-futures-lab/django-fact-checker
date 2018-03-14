@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from markdownx.models import MarkdownxField
 
 
 class BaseModel(models.Model):
@@ -37,6 +38,15 @@ class ClaimSource(BaseModel):
     """
     Person, organization or other entity that is the source of a reviewable claim.
     """
+    SOURCE_TYPE_CHOICES = (
+        ('o', 'Organization'),
+        ('p', 'Person'),
+    )
+    source_type = models.CharField(
+        max_length=1,
+        choices = SOURCE_TYPE_CHOICES,
+        help_text="Type of source (e.g., 'Person' or 'Organization').",
+    )
     name = models.CharField(
         max_length=300,
         help_text="Name of the source of claim (e.g., 'Donald Trump' or the "
@@ -152,7 +162,7 @@ class ClaimReview(BaseModel):
         blank=True,
         help_text='Short statement summarizing the review of the claim.',
     )
-    body = models.TextField(
+    body = MarkdownxField(
         blank=True,
         help_text='Full narrative of the review, including explanations and '
                   'conclusions surfaced by reporting and research.',

@@ -1,0 +1,5 @@
+{% load markdown_deux_tags %}
+
+<h1>{{ claim_review.claim }}</h1>
+<h2>{{ claim_review.summary }}</h2>
+{{ claim_review.body|markdown }}
