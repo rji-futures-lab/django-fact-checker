@@ -12,8 +12,6 @@ def index(request):
         published_on__lte=timezone.now()
     ).order_by('-published_on')
 
-    print(claim_review_list.count())
-
     context = {
         'claim_review_list': claim_review_list,
     }
