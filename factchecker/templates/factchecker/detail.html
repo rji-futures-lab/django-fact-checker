@@ -2,10 +2,12 @@
 {% load markdown_deux_tags %}
 
 {% block content %}
-<h1>{{ claim_review.claim.summary }}</h1>
-<h3>-{{ claim_review.claim.source }}</h3>
-<h3>{{ claim_review.claim.context_description }}</h3>
-<h3>{{ claim_review.summary }}</h3>
-<p>By <a href='mailto:{{ claim_review.created_by.email }}'>{{ claim_review.created_by.get_full_name }}</a></p>
-{{ claim_review.body|markdown }}
+<div class="container">
+  <h1>{{ claim_review.claim.summary }}</h1>
+  <h3>-{{ claim_review.claim.source }}</h3>
+  <h3>{{ claim_review.claim.context_description }}</h3>
+  <h3>{{ claim_review.summary }}</h3>
+  <p>By <a href='mailto:{{ claim_review.created_by.email }}'>{{ claim_review.created_by.get_full_name }}</a></p>
+  {{ claim_review.body|markdown }}
+</div>
 {% endblock %}

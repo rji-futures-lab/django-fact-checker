@@ -13,7 +13,8 @@
             "appnope*", "parso*", "pexpect*", "ptyprocess*",
             "pickleshare*", "prompt-toolkit*", "wcwidth*", "pygments*",
             "simplegeneric*", "traitlets*", "colorama*", "settings_local.py",
-            "sqlite.db", ".python-version", "requirements-dev.txt", "README.md"
+            "sqlite.db", ".python-version", "requirements-dev.txt", "README.md",
+            "factchecker/static/"
         ],
     }
 }
