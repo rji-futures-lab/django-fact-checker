@@ -1,5 +1,11 @@
+{% extends 'factchecker/base.html' %}
 {% load markdown_deux_tags %}
 
-<h1>{{ claim_review.claim }}</h1>
-<h2>{{ claim_review.summary }}</h2>
+{% block content %}
+<h1>{{ claim_review.claim.summary }}</h1>
+<h3>-{{ claim_review.claim.source }}</h3>
+<h3>{{ claim_review.claim.context_description }}</h3>
+<h3>{{ claim_review.summary }}</h3>
+<p>By <a href='mailto:{{ claim_review.created_by.email }}'>{{ claim_review.created_by.get_full_name }}</a></p>
 {{ claim_review.body|markdown }}
+{% endblock %}

@@ -1,3 +1,5 @@
+{% extends 'factchecker/base.html' %}
+{% block content %}
 {% if claim_review_list %}
     <ul>
     {% for cr in claim_review_list %}
@@ -9,3 +11,4 @@
 {% else %}
     <p>No reviewed claims available.</p>
 {% endif %}
+{% endblock %}
