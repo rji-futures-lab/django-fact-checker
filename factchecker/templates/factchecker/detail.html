@@ -3,6 +3,7 @@
 
 {% block content %}
 <div class="container">
+  <h1>{{ claim_review.rating.emojis }}{{ skin_tone }}&#x200D;{{ gender }}</h1>
   <h1>{{ claim_review.claim.summary }}</h1>
   <h3>-{{ claim_review.claim.source }}</h3>
   <h3>{{ claim_review.claim.context_description }}</h3>

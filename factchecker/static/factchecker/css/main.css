@@ -1,3 +1,8 @@
 header {
-    height: 200px !important;
+    height: 200px;
 }
+
+#state-sil {
+    height: 180px;
+}
+
