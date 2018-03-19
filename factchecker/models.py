@@ -91,7 +91,12 @@ class ClaimRating(BaseModel):
         blank=True,
         height_field=100,
         width_field=100,
-        help_text='Image file representing the rating of the claim.',
+        help_text='Image file representing the rating of a claim.',
+    )
+    emojis = models.CharField(
+        max_length=20,
+        blank=True,
+        help_text='Emojis characters representing the rating of a claim.',
     )
 
     class Meta:
