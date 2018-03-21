@@ -1,7 +1,8 @@
 {% extends 'factchecker/base.html' %}
 {% load static %}
 {% block content %}
-<div class="jumbotron jumbotron-fluid">
+
+<div class="jumbotron">
   <div class="row">
     <div class='col-4'>
       <img
@@ -11,7 +12,7 @@
       >
     </div>
     <div class='col-8'>
-      <h1 class="display-3"><span class="red-font">Missouri</span> <span class="blue-font">Education</span> Fact Checker</h1>
+      <h1 class="display-4"><span class="red-font">Missouri</span> <span class="blue-font">Education</span> Fact Checker</h1>
       <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
     </div>
   </div>
@@ -20,7 +21,8 @@
   <div class='col-12'>
 {% if claim_review_list %}
   {% for cr in claim_review_list %}
-    <div class="row">
+    <a href="{% url 'factchecker:detail' cr.id %}" style="text-decoration: none;">
+    <div class="row claim-review-summary">
       <div class="col-2">
         <img
           class="source-img"
@@ -30,12 +32,14 @@
       </div>
       <div class="col-8">
         <p class="source-name">{{ cr.claim.source }}</p>
-        <p>{{ cr.claim.summary }} – <span style="font-style: italic;">{{ cr.claim.context_description }} ({{ cr.claim.claimed_on }})</span></p>
+        <p>{{ cr.claim.summary }} – <span class="italics">{{ cr.claim.context_description }} ({{ cr.claim.claimed_on }})</span></p>
       </div>
       <div class="col-2 emoji-rating">
         {{ cr.rating.emojis|safe }}{{ skin_tone }}&#x200D;{{ gender }}
       </div>
     </div>
+    </a>
+    <hr>
   {% endfor %}
 {% else %}
   <p>No reviewed claims available.</p>
