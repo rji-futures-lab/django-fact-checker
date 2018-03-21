@@ -44,6 +44,7 @@ def index(request):
         'claim_review_list': claim_review_list,
         'skin_tone': get_random_skin_tone(),
         'gender': get_random_gender(),
+        'jumbo': True,
     }
 
     return render(request, 'factchecker/index.html', context)

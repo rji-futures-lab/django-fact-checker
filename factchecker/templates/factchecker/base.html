@@ -7,9 +7,13 @@
     <link rel="stylesheet" type="text/css" href="{% static 'factchecker/css/main.css' %}">
   </head>
   <body>
-    {% include 'factchecker/header.html' %}
+  <div class='container'>
+    {% if not jumbo %}
+      {% include 'factchecker/header.html' %}
+    {% endif %}
     {% block content %}
     {% endblock %}
     {% include 'factchecker/footer.html' %}
+  </div>
   </body>
 </html>

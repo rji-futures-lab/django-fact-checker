@@ -2,7 +2,10 @@ header {
     height: 200px;
 }
 
-#state-sil {
-    height: 180px;
+.red-font {
+    color: red;
 }
 
+.blue-font {
+    color: blue;
+}

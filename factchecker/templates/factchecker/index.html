@@ -1,14 +1,34 @@
 {% extends 'factchecker/base.html' %}
+{% load static %}
 {% block content %}
+<div class="jumbotron jumbotron-fluid">
+  <div class="row">
+    <div class='col-4'>
+      <img
+        id='state-sil'
+        src="{% static 'factchecker/img/missouri-map-grey-silhouette.svg' %}"
+        alt="Silhouette of State of Missouri"
+      >
+    </div>
+    <div class='col-8'>
+      <h1 class="display-3"><span class="red-font">Missouri</span> <span class="blue-font">Education</span> Fact Checker</h1>
+      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-12'
 {% if claim_review_list %}
-    <ul>
-    {% for cr in claim_review_list %}
-        <li>
-            <a href="{% url 'factchecker:detail' cr.id %}">{{ cr.claim }}</a>{{ cr.rating.emojis }}{{ skin_tone }}&#x200D;{{ gender }}{{ cr.rating.label }}
-        </li>
-    {% endfor %}
-    </ul>
+  <ul>
+  {% for cr in claim_review_list %}
+    <li>
+      <a href="{% url 'factchecker:detail' cr.id %}">{{ cr.claim }}</a> {{ cr.rating.emojis|safe }}{{ skin_tone }}&#x200D;{{ gender }} {{ cr.rating.label }}
+    </li>
+  {% endfor %}
+  </ul>
 {% else %}
-    <p>No reviewed claims available.</p>
+  <p>No reviewed claims available.</p>
 {% endif %}
+  </div>
+</div>
 {% endblock %}
