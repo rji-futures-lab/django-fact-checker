@@ -9,3 +9,12 @@ header {
 .blue-font {
     color: blue;
 }
+
+.emoji-rating {
+    font-size: 8em;
+}
+
+.source-name {
+    text-transform: uppercase;
+    font-weight: bold;
+}

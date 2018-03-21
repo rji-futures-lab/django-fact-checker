@@ -1,3 +1,4 @@
+{% load static %}
 {% load staticfiles %}
 <!DOCTYPE html>
 <html class="no-js" lang="en" >
@@ -6,7 +7,7 @@
     <link href="https://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'factchecker/css/main.css' %}">
   </head>
-  <body>
+  <body data-media-url="{% get_media_prefix %}">
   <div class='container'>
     {% if not jumbo %}
       {% include 'factchecker/header.html' %}

@@ -58,9 +58,11 @@ class ClaimSource(BaseModel):
         blank=True,
     )
     image = models.ImageField(
+        upload_to='claim-source-images/',
         blank=True,
-        height_field=100,
-        width_field=100,
+        # https://docs.djangoproject.com/en/2.0/ref/models/fields/#django.db.models.ImageField.height_field
+        # height_field=100, ???
+        # width_field=100, ???
         help_text='Image file representing the source.',
     )
 
@@ -89,8 +91,10 @@ class ClaimRating(BaseModel):
     )
     image = models.ImageField(
         blank=True,
-        height_field=100,
-        width_field=100,
+        upload_to='claim-rating-images/'
+        # https://docs.djangoproject.com/en/2.0/ref/models/fields/#django.db.models.ImageField.height_field
+        # height_field=100, ???
+        # width_field=100, ???
         help_text='Image file representing the rating of a claim.',
     )
     emojis = models.CharField(

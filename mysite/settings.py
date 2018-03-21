@@ -25,6 +25,8 @@ load_dotenv(dotenv_path, verbose=True)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
+LOGIN_URL = '/admin/login/'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
@@ -35,6 +37,7 @@ ALLOWED_HOSTS = [
     'factchecker.rjifuture.org',
 ]
 
+MEDIA_ROOT = os.path.join(BASE_DIR, ".media")
 
 # Application definition
 
@@ -138,9 +141,10 @@ AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
-STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+STATIC_URL = "https://%s/.static/" % AWS_S3_CUSTOM_DOMAIN
+MEDIA_URL = "https://%s/.media/" % AWS_S3_CUSTOM_DOMAIN
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # load local dev settings, if they exist
 try:

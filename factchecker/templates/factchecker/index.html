@@ -17,15 +17,26 @@
   </div>
 </div>
 <div class='row'>
-  <div class='col-12'
+  <div class='col-12'>
 {% if claim_review_list %}
-  <ul>
   {% for cr in claim_review_list %}
-    <li>
-      <a href="{% url 'factchecker:detail' cr.id %}">{{ cr.claim }}</a> {{ cr.rating.emojis|safe }}{{ skin_tone }}&#x200D;{{ gender }} {{ cr.rating.label }}
-    </li>
+    <div class="row">
+      <div class="col-2">
+        <img
+          class="source-img"
+          src="/.media/{{ cr.claim.source.image }}"
+          alt="{{ cr.claim.source }}"
+        >
+      </div>
+      <div class="col-8">
+        <p class="source-name">{{ cr.claim.source }}</p>
+        <p>{{ cr.claim.summary }} – <span style="font-style: italic;">{{ cr.claim.context_description }} ({{ cr.claim.claimed_on }})</span></p>
+      </div>
+      <div class="col-2 emoji-rating">
+        {{ cr.rating.emojis|safe }}{{ skin_tone }}&#x200D;{{ gender }}
+      </div>
+    </div>
   {% endfor %}
-  </ul>
 {% else %}
   <p>No reviewed claims available.</p>
 {% endif %}
