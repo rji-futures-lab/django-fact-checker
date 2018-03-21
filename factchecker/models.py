@@ -91,7 +91,7 @@ class ClaimRating(BaseModel):
     )
     image = models.ImageField(
         blank=True,
-        upload_to='claim-rating-images/'
+        upload_to='claim-rating-images/',
         # https://docs.djangoproject.com/en/2.0/ref/models/fields/#django.db.models.ImageField.height_field
         # height_field=100, ???
         # width_field=100, ???
