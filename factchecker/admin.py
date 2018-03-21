@@ -34,6 +34,7 @@ class ClaimRatingAdmin(admin.ModelAdmin):
     """
     list_display = (
         'label',
+        'emojis',
         'definition',
         'created_by',
         'created_at',
