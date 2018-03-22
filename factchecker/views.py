@@ -35,7 +35,7 @@ def randomize_emoji(emoji_char):
     return combine
 
 @require_safe
-# @login_required
+@login_required
 @xframe_options_exempt
 def index(request):
     claim_review_list = ClaimReview.objects.filter(
@@ -52,7 +52,7 @@ def index(request):
 
 
 @require_safe
-# @login_required
+@login_required
 @xframe_options_exempt
 def detail(request, claim_review_id):
     context = {
