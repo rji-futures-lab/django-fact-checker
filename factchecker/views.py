@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, render
 from django.utils import timezone
 from django.views.decorators.http import require_safe
 from .models import ClaimReview
+from django.views.decorators.clickjacking import xframe_options_exempt
 
 
 def get_random_skin_tone():
@@ -34,7 +35,8 @@ def randomize_emoji(emoji_char):
     return combine
 
 @require_safe
-@login_required
+# @login_required
+@xframe_options_exempt
 def index(request):
     claim_review_list = ClaimReview.objects.filter(
         published_on__lte=timezone.now()
@@ -50,7 +52,8 @@ def index(request):
 
 
 @require_safe
-@login_required
+# @login_required
+@xframe_options_exempt
 def detail(request, claim_review_id):
     context = {
         'claim_review': get_object_or_404(ClaimReview, pk=claim_review_id),
