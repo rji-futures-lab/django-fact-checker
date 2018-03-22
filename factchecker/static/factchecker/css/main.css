@@ -25,6 +25,14 @@
     border: 1px solid hotpink;
 }
 
+.claim-review-summary:hover .read-more {
+    color: hotpink;
+}
+
+.read-more {
+    color: blue;
+}
+
 .claim-review-summary {
     border: 1px solid white;
     color: black;
@@ -36,11 +44,8 @@ body {
   padding-top: 4.5rem;
 }
 
-.italics {
+.context {
     font-style: italic;
-}
-
-.right-align {
     text-align: right;
 }
 
@@ -50,4 +55,13 @@ body {
     margin-bottom: 25px;
     padding: 20px 0px 10px 0px;
     width: 100%;
+}
+
+.source-img {
+    max-height: 160px;
+    max-width: 160px;
+}
+
+.claim {
+    margin-bottom: 0px;
 }

@@ -3,16 +3,22 @@
 
 {% block content %}
 <div class="row">
-  <div class="col-2">
+  <div class="col-3">
     <img
       class="source-img"
-      src="/.media/{{ cr.claim.source.image }}"
-      alt="{{ cr.claim.source }}"
+      src="{{ claim_review.claim.source.image.url }}"
+      alt="{{ claim_review.claim.source }}"
     >
   </div>
-  <div class="col-8">
+  <div class="col-7">
     <h1>{{ claim_review.claim.summary }}</h1>
-    <p class="italics right-align">- {{ claim_review.claim.source }}<br>{{ claim_review.claim.context_description }}</p>
+    <p class="context">- {{ claim_review.claim.source }}<br>
+    {% if claim_review.claim.context_url %}
+      <a href="claim_review.claim.context_url">{{ claim_review.claim.context_description }} ({{ claim_review.claim.claimed_on }})</a>
+    {% else %}
+      {{ claim_review.claim.context_description }} ({{ claim_review.claim.claimed_on }})
+    {% endif %}
+    </p>
   </div>
 </div>
 <div class="row justify-content-center rating">

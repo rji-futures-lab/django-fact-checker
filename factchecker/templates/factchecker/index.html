@@ -26,16 +26,19 @@
       <div class="col-2">
         <img
           class="source-img"
-          src="/.media/{{ cr.claim.source.image }}"
+          src="{{ cr.claim.source.image.url }}"
           alt="{{ cr.claim.source }}"
         >
       </div>
       <div class="col-8">
         <p class="source-name">{{ cr.claim.source }}</p>
-        <p>{{ cr.claim.summary }} – <span class="italics">{{ cr.claim.context_description }} ({{ cr.claim.claimed_on }})</span></p>
+        <p class="claim">{{ cr.claim.summary }}</p>
+        <p class="context">– {{ cr.claim.context_description }} ({{ cr.claim.claimed_on }})</span></p>
+        <h3>{{ cr.rating }}</h3>
+        <p>{{ cr.summary }} <span class='read-more'>Read more >>></span></p>
       </div>
       <div class="col-2 emoji-rating">
-        {{ cr.rating.emojis|safe }}{{ skin_tone }}&#x200D;{{ gender }}
+        {{ cr.rating.emojis |safe }}{{ skin_tone }}&#x200D;{{ gender }}
       </div>
     </div>
     </a>
