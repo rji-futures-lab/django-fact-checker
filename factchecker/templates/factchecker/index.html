@@ -23,13 +23,15 @@
   {% for cr in claim_review_list %}
     <a href="{% url 'factchecker:detail' cr.id %}" style="text-decoration: none;">
     <div class="row claim-review-summary">
-      <div class="col-2">
-        <img
-          class="source-img"
-          src="{{ cr.claim.source.image.url }}"
-          alt="{{ cr.claim.source }}"
-        >
-      </div>
+      {% if cr.claim.source.image %}
+        <div class="col-2">
+          <img
+            class="source-img"
+            src="{{ cr.claim.source.image.url }}"
+            alt="{{ cr.claim.source }}"
+          >
+        </div>
+      {% endif %}
       <div class="col-8">
         <p class="source-name">{{ cr.claim.source }}</p>
         <p class="claim">{{ cr.claim.summary }}</p>

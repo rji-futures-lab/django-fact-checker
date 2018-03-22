@@ -3,6 +3,7 @@
 
 {% block content %}
 <div class="row">
+  {% if cr.claim.source.image %}
   <div class="col-3">
     <img
       class="source-img"
@@ -10,6 +11,7 @@
       alt="{{ claim_review.claim.source }}"
     >
   </div>
+  {% endif %}
   <div class="col-7">
     <h1>{{ claim_review.claim.summary }}</h1>
     <p class="context">- {{ claim_review.claim.source }}<br>
