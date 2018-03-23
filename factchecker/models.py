@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+import lipsum
 from markdownx.models import MarkdownxField
 
 
@@ -191,3 +192,13 @@ class ClaimReview(BaseModel):
             self.rating.label,
             self.published_on,
         )
+
+    @property
+    def body_or_lipsum(self):
+        """
+        Return the body text (if it exists), otherwise Lorem Ipsum text.
+        """
+        if not self.body == '':
+            return self.body
+        else:
+            return lipsum.generate_words(100)
