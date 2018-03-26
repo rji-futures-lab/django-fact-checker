@@ -1,3 +1,39 @@
+
+/*
+other options
+    * https://coolors.co/0a2463-fb3640-329bb1-605f5e-e2e2e2;
+    * http://www.color-hex.com/color-palette/57839
+*/
+
+
+/* will work for shrimp 
+#022834 > light black
+#004C5E > dark teal
+#006985 > light teal
+#E98820 > golden yellow
+#AC1316 > light red
+*/
+
+/* clipboard with text
+https://dribbble.com/shots/4367266-Clipboard-with-text
+#0077B8 > dark blue
+#FCFCFC > white
+#101011 > black
+#ABDBE8 > light blue
+#FAAB12 > yellow
+#FB2A05 > red
+#727789 > gray
+#329BB1 > teal
+or ???? https://dribbble.com/shots/4378719-DiOB-Survey
+*/
+
+
+
+.emoji-rating {
+    text-align: center;
+    font-size: 3em;
+}
+
 #navbarCollapse {
     margin-left: 20px;
 }
@@ -8,25 +44,11 @@
 
 .navbar-nav li {
     margin-right: 10px;
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
-.title {
-    max-height: 220px;
-    padding: 32px;
-    background-color: #e9ecef;
-}
-
-.red-font {
-    color: red;
-}
-
-.blue-font {
-    color: blue;
-}
-
-.emoji-rating {
-    font-size: 8em;
+.yellow-font {
+    color: #E98820;
 }
 
 .source-name {
@@ -34,22 +56,27 @@
     font-weight: bold;
 }
 
-.claim-review-summary:hover {
-    border: 1px solid hotpink;
+.claim-review-item {
+    padding-top: 10px;
+    color: black;
+    border-bottom: 1px solid #101011;
 }
 
-.claim-review-summary:hover .read-more {
-    color: hotpink;
+.claim-review-item:hover {
+    background-color: #ABDBE8;
+    border-bottom: 1px solid white;
 }
+
 
 .read-more {
     color: blue;
 }
 
-.claim-review-summary {
-    border: 1px solid white;
-    color: black;
-    padding: 10px;
+.rating {
+    text-align: center;
+    margin-bottom: 25px;
+    padding: 20px 0px 10px 0px;
+    background-color: lightblue;
 }
 
 body {
@@ -58,23 +85,136 @@ body {
 }
 
 .context {
+    font-size: 13px;
     font-style: italic;
     text-align: right;
-}
-
-.rating {
-    text-align: center;   
-    background-color: #e9ecef;
-    margin-bottom: 25px;
-    padding: 20px 0px 10px 0px;
-    width: 100%;
-}
-
-.source-img {
-    max-height: 160px;
-    max-width: 160px;
+    margin-bottom: 26px;
 }
 
 .claim {
     margin-bottom: 0px;
+}
+
+.rating-summary {
+    text-align: center;
+}
+
+.rating-label, .rating-label-detail {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #FB2A05;
+    text-align: center;
+}
+
+.title {
+    margin-bottom: 10px;
+}
+
+.jumbotron {
+    padding-bottom: 32px;
+}
+
+.rating-summary-label {
+    padding-top: 20px;
+}
+
+@media (max-width: 576px) {
+    .image-wrapper {
+        display: none;
+    }
+    .rating-summary, .rating-label {
+        text-align: left;
+    }
+    .emoji-rating {
+        font-size: 4em;
+    }
+    .state-container {
+        display: none;
+    }
+    .title h1 {
+        text-align: center;
+    }
+    .title .lead {
+        display: none;
+    }
+    .claim-detail h2 {
+        font-size: 26px;
+    }
+}
+
+@media (min-width: 576px) {
+    .state-container {
+        display: none;
+    }
+    .title h1 {
+        text-align: center;
+    }
+    .title .lead {
+        display: none;
+    }
+    .emoji-rating {
+        font-size: 5em;
+    }
+    .rating-summary, .rating-label {
+        text-align: left;
+    }
+    .claim-detail h2 {
+        font-size: 26px;
+    }
+}
+
+@media (min-width: 768px) {
+    .emoji-rating {
+        font-size: 6em;
+    }
+    .state-container {
+        display: unset;
+    }
+    .rating-summary, .rating-label {
+        text-align: center;
+    }
+    .jumbotron .lead {
+        text-align: center;
+        display: unset;
+    }
+    .title .lead {
+        display: none;
+    }
+    .title h1 {
+        text-align: left;
+    }
+    .claim-detail h2 {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 992px) {
+    .emoji-rating {
+        font-size: 8em;
+    }
+    .jumbotron .lead {
+        text-align: center;
+        display: none;
+    }
+    .title .lead {
+        display: unset;
+    }
+    .rating-summary-label {
+        padding-top: 0px;
+    }
+    .claim-detail h2 {
+        font-size: 32px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .emoji-rating {
+        font-size: 8em;
+    }
+}
+
+.source-img {
+    max-width: 100%;
+    max-height: 100%;
+    margin-bottom: 20px;
 }

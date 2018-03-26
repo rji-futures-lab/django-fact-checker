@@ -2,53 +2,62 @@
 {% load static %}
 {% block content %}
 
-<div class="jumbotron">
-  <div class="row">
-    <div class='col-4'>
-      <img
-        id='state-sil'
-        src="{% static 'factchecker/img/missouri-map-grey-silhouette.svg' %}"
-        alt="Silhouette of State of Missouri"
-      >
-    </div>
-    <div class='col-8'>
-      <h1 class="display-4"><span class="red-font">Missouri</span> <span class="blue-font">Education</span> Fact Checker</h1>
-      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <div class="row">
+      <div class='col-12 col-md-4 state-container'>
+        <img
+          id='state-sil'
+          src="{% static 'factchecker/img/missouri-map-grey-silhouette.svg' %}"
+          alt="Silhouette of State of Missouri"
+        >
+      </div>
+      <div class='col-12 col-md-8 title'>
+        <h1 class="display-4"><span class="yellow-font">Missouri Education</span> Fact Checker</h1>
+        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+      <div class="col-12">
+        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
     </div>
   </div>
 </div>
-<div class='row'>
-  <div class='col-12'>
 {% if claim_review_list %}
   {% for cr in claim_review_list %}
     <a href="{% url 'factchecker:detail' cr.id %}" style="text-decoration: none;">
-    <div class="row claim-review-summary">
+    <div class="row claim-review-item row">
       {% if cr.claim.source.image %}
-        <div class="col-2">
-          <img
-            class="source-img"
-            src="{{ cr.claim.source.image.url }}"
-            alt="{{ cr.claim.source }}"
-          >
-        </div>
+      <div class="col-sm-3 order-1 image-wrapper">
+        <img
+          class="source-img"
+          src="{{ cr.claim.source.image.url }}"
+          alt="{{ cr.claim.source.name }}"
+        >
+      </div>
+      <div class="col-sm-9 col-lg-6 order-2 order-lg-2">
+      {% else %}
+      <div class="col-12 col-lg-6 order-1">
       {% endif %}
-      <div class="col-8">
-        <p class="source-name">{{ cr.claim.source }}</p>
+        <p class="source-name">{{ cr.claim.source.name }}</p>
         <p class="claim">{{ cr.claim.summary }}</p>
         <p class="context">– {{ cr.claim.context_description }} ({{ cr.claim.claimed_on }})</span></p>
-        <h3>{{ cr.rating }}</h3>
-        <p>{{ cr.summary }} <span class='read-more'>Read more >>></span></p>
       </div>
-      <div class="col-2 emoji-rating">
-        {{ cr.rating.emojis |safe }}{{ skin_tone }}&#x200D;{{ gender }}
+      <div class="col-7 col-lg-12 order-3 order-lg-4 rating-summary-label">
+        <h3 class="rating-label">{{ cr.rating }}</h3>
+        <p class="rating-summary">{{ cr.summary }} <span class='read-more'>Read more >>></span></p>
+      </div>
+      <div class="col-5 col-lg-3 emoji-rating order-4 order-lg-3">
+        {{ cr.rating.emojis | safe }}{{ skin_tone }}&#x200D;{{ gender }}
       </div>
     </div>
     </a>
-    <hr>
   {% endfor %}
 {% else %}
-  <p>No reviewed claims available.</p>
-{% endif %}
+  <div class="row">
+    <div class="col-12">
+      <p>No reviewed claims available.</p>
+    </div>
   </div>
-</div>
+{% endif %}
+
 {% endblock %}

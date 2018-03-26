@@ -4,7 +4,7 @@
 {% block content %}
 <div class="row">
   {% if claim_review.claim.source.image %}
-  <div class="col-3">
+  <div class="col-12 col-md-4">
     <img
       class="source-img"
       src="{{ claim_review.claim.source.image.url }}"
@@ -12,8 +12,8 @@
     >
   </div>
   {% endif %}
-  <div class="col-7">
-    <h1>{{ claim_review.claim.summary }}</h1>
+  <div class="col-12 col-md-8 claim-detail">
+    <h2>{{ claim_review.claim.summary }}</h2>
     <p class="context">- {{ claim_review.claim.source }}<br>
     {% if claim_review.claim.context_url %}
       <a href="claim_review.claim.context_url">{{ claim_review.claim.context_description }} ({{ claim_review.claim.claimed_on }})</a>
@@ -23,9 +23,9 @@
     </p>
   </div>
 </div>
-<div class="row justify-content-center rating">
-  <div class="col-auto">
-    <h2>{{ claim_review.rating.label }}</h2>
+<div class="row rating">
+  <div class="col-12">
+    <h2 class="rating-label-detail">{{ claim_review.rating.label }}</h2>
     <h2 class='emoji-rating'>{{ claim_review.rating.emojis|safe }}{{ skin_tone }}&#x200D;{{ gender }}</h2>
     <h5>{{ claim_review.summary }}</h5>
   </div>
@@ -33,7 +33,7 @@
 <div class="row">
   <div class="col-12">
     <p>By <a href='mailto:{{ claim_review.created_by.email }}'>{{ claim_review.created_by.get_full_name }}</a></p>
-    {{ claim_review.body|markdown }}
+    {{ claim_review.body_or_lipsum|markdown }}
   </div>
 </div>
 {% endblock %}
