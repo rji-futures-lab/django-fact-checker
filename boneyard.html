@@ -1,0 +1,32 @@
+{% block extra %}
+
+  <script type="text/javascript">
+    function swapImages() {
+
+      var wrapper = $( ".image-wrapper" );
+      var img = wrapper.find( ".source-img" );
+      var emj = wrapper.find( ".emj" );
+
+      img.toggleClass("img-hide");
+      emj.toggleClass("img-hide");
+
+    };
+
+    window.setInterval(function() {
+      swapImages()
+    }, 3000);
+  </script>
+
+{% endblock %}
+
+
+      if ( img.hasClass("img-show") ) {
+          img.toggleClass("img-hide");
+          emj.toggleClass("img-hide");
+            '<div class="col-5 item-img emoji-rating">{{ cr.rating.emojis|escapejs }}{{ skin_tone }}&#x200D;{{ gender }}</div>'
+          );
+      } else {
+          img.replaceWith(
+            '<img class="item-img source-img src="{{ cr.claim.source.image.url|escapejs }}" alt="{{ cr.claim.source.name }}">'
+          );
+      };
