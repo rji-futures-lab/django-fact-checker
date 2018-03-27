@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render
 from django.utils import timezone
 from django.views.decorators.http import require_safe
-from .models import ClaimReview
+from .models import ClaimReview, ClaimRating
 from django.views.decorators.clickjacking import xframe_options_exempt
 
 
@@ -62,3 +62,15 @@ def detail(request, claim_review_id):
     }
     
     return render(request, 'factchecker/detail.html', context)
+
+
+@require_safe
+@login_required
+@xframe_options_exempt
+def about(request):
+    context = {
+        'ratings': ClaimRating.objects.all(),
+        'skin_tone': get_random_skin_tone(),
+        'gender': get_random_gender(),
+    }
+    return render(request, 'factchecker/about.html', context)

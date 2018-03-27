@@ -243,3 +243,20 @@ body {
     max-height: 100%;
     margin-bottom: 20px;
 }
+
+.about h1 {
+    text-align: center;
+    margin-top: 60px;
+}
+
+.about .emoji-rating {
+    font-size: 4em;
+}
+
+.about .rating-label {
+    font-size: 2em;
+}
+
+.definition {
+    margin-bottom: 40px;
+}

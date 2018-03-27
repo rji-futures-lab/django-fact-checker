@@ -2,6 +2,7 @@
 {% load markdown_deux_tags %}
 
 {% block content %}
+<div class="container">
 <div class="row">
   {% if claim_review.claim.source.image %}
   <div class="col-12 col-md-4">
@@ -26,7 +27,7 @@
 <div class="row rating">
   <div class="col-12">
     <h2 class="rating-label-detail {{ claim_review.rating.css_class }}">{{ claim_review.rating.label }}</h2>
-    <h2 class='emoji-rating'>{{ claim_review.rating.emojis|safe }}{{ skin_tone }}&#x200D;{{ gender }}</h2>
+    <h2 class='emoji-rating'>{{ claim_review.rating.emojis|safe }}{{ skin_tone }}{% if claim_review.rating.label != "True" %}&#x200D;{{ gender }}{% endif %}</h2>
     <h5>{{ claim_review.summary }}</h5>
   </div>
 </div>
@@ -35,5 +36,6 @@
     <p>By <a href='mailto:{{ claim_review.created_by.email }}'>{{ claim_review.created_by.get_full_name }}</a></p>
     {{ claim_review.body_or_lipsum|markdown }}
   </div>
+</div>
 </div>
 {% endblock %}

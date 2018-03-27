@@ -117,6 +117,14 @@ class ClaimRating(BaseModel):
         """
         return "%s-color" % self.label.replace(" ", "-").lower()
 
+    @property
+    def definition_or_placeholder(self):
+        """
+        Return Rating definition or placeholder text.
+        """
+        return 'This is where the definition for the "%s" rating would appear, \
+if had been entered into the admin interface.' % self.label
+
 
 class Claim(BaseModel):
     source = models.ForeignKey(
