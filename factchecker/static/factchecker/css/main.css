@@ -57,19 +57,26 @@ or ???? https://dribbble.com/shots/4378719-DiOB-Survey
 }
 
 .claim-review-item {
-    padding-top: 10px;
+    /*padding-top: 10px;*/
+    border-radius: 25px;
+    padding: 10px;
     color: black;
-    border-bottom: 1px solid #101011;
+    border: 2px solid #ABDBE8;
 }
 
 .claim-review-item:hover {
-    background-color: #ABDBE8;
-    border-bottom: 1px solid white;
+    /*background-color: #ABDBE8;*/
+    border: 5px solid #329BB1;
+    padding: 7px;
 }
 
+.claim-review-item:hover .read-more {
+    color: #0077B8;
+}
 
 .read-more {
-    color: blue;
+    color: #329BB1;
+    font-weight: bold;
 }
 
 .rating {
