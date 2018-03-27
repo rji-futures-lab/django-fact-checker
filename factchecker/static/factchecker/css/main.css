@@ -28,6 +28,26 @@ or ???? https://dribbble.com/shots/4378719-DiOB-Survey
 */
 
 
+.true-color {
+    color: #faab12;
+}
+
+.mostly-true-color {
+    color: #fc920c;
+}
+
+.toss-up-color {
+    color: #fd7708;
+}
+
+.mostly-false-color {
+    color: #fc5805;
+}
+
+.false-color {
+    color: #fb2a05;
+}
+
 
 .emoji-rating {
     text-align: center;
@@ -57,7 +77,6 @@ or ???? https://dribbble.com/shots/4378719-DiOB-Survey
 }
 
 .claim-review-item {
-    /*padding-top: 10px;*/
     border-radius: 25px;
     padding: 10px;
     color: black;
@@ -65,7 +84,6 @@ or ???? https://dribbble.com/shots/4378719-DiOB-Survey
 }
 
 .claim-review-item:hover {
-    /*background-color: #ABDBE8;*/
     border: 5px solid #329BB1;
     padding: 7px;
 }
@@ -83,7 +101,8 @@ or ???? https://dribbble.com/shots/4378719-DiOB-Survey
     text-align: center;
     margin-bottom: 25px;
     padding: 20px 0px 10px 0px;
-    background-color: lightblue;
+    background-color: #ABDBE8;
+    border-radius: 25px;
 }
 
 body {
@@ -109,7 +128,6 @@ body {
 .rating-label, .rating-label-detail {
     text-transform: uppercase;
     font-weight: bold;
-    color: #FB2A05;
     text-align: center;
 }
 

@@ -110,6 +110,13 @@ class ClaimRating(BaseModel):
     def __str__(self):
         return self.label
 
+    @property
+    def css_class(self):
+        """
+        Return the CSS class to set the label's font color.
+        """
+        return "%s-color" % self.label.replace(" ", "-").lower()
+
 
 class Claim(BaseModel):
     source = models.ForeignKey(
