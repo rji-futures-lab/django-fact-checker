@@ -17,7 +17,7 @@
     <h2>{{ claim_review.claim.summary }}</h2>
     <p class="context">- {{ claim_review.claim.source }}<br>
     {% if claim_review.claim.context_url %}
-      <a href="claim_review.claim.context_url">{{ claim_review.claim.context_description }} ({{ claim_review.claim.claimed_on }})</a>
+      <a href="{{ claim_review.claim.context_url }}">{{ claim_review.claim.context_description }} ({{ claim_review.claim.claimed_on }})</a>
     {% else %}
       {{ claim_review.claim.context_description }} ({{ claim_review.claim.claimed_on }})
     {% endif %}
