@@ -36,6 +36,7 @@ class ClaimRatingAdmin(admin.ModelAdmin):
         'label',
         'emojis',
         'definition',
+        'sort_order',
         'created_by',
         'created_at',
         'last_modified_by',

@@ -103,9 +103,14 @@ class ClaimRating(BaseModel):
         blank=True,
         help_text='Emojis characters representing the rating of a claim.',
     )
+    sort_order = models.IntegerField(
+        default=0,
+        help_text='Order in which this item appears.',
+    )
 
     class Meta:
         verbose_name = 'rating'
+        ordering = ['sort_order']
 
     def __str__(self):
         return self.label
