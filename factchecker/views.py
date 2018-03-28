@@ -30,8 +30,6 @@ def randomize_emoji(emoji_char):
         variation_select_char
     ])
 
-    print(combine)
-
     return combine
 
 @require_safe
