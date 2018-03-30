@@ -33,7 +33,6 @@
 </div>
 <div class="row">
   <div class="col-12">
-    <p>By <a href='mailto:{{ claim_review.created_by.email }}'>{{ claim_review.created_by.get_full_name }}</a></p>
     {{ claim_review.body_or_lipsum|markdown }}
   </div>
 </div>
