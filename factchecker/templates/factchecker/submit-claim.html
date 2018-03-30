@@ -1,0 +1,132 @@
+{% extends 'factchecker/base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row justify-content-center tips">
+    <div class="col-10">
+      <h1>Got a tip?</h1>
+      <p>
+        The <a href="https://www.rjionline.org/" target="_blank">RJI</a> Futures Lab is building a fact-checking website covering education-related issues in Missouri, and we could use your help.
+      </p>
+      <p>
+        We're collecting newsworthy public claims made by newsworthy people and organizations having anything to do with:
+      </p>
+      <ul>
+        <li>Higher education</li>
+        <li>Primary or secondary education</li>
+        <li>Public or private schools</li>
+        <li>Early childhood education</li>
+      </ul>
+      <p>
+        We can't promise to get to the bottom of every claim that floats our way. However, we will be honest and transparent when publish our findings.
+      </p>
+      <p>
+        We 💖 your help. Thank you. 🙏
+      </p>
+    </div>
+  </div>
+</div>
+
+<form action="/submit-claim/" method="post">
+  {% csrf_token %}
+  <h3>Who said it?</h3>
+  <!-- source fields -->
+  <div class="container field-container">
+    <!-- select / add new buttons -->
+    <div class="row">
+      <div class="col-auto">
+        <div class="btn-group btn-group-toggle" role="group" aria-label="Select or Add New source" data-toggle="buttons">
+          <label class="btn btn-info active">
+            <input type="radio" name="options" id="select" autocomplete="off" checked> Select
+          </label>
+          <label class="btn btn-outline-info">
+            <input type="radio" name="options" id="add-new" autocomplete="off"> Add New
+          </label>
+        </div>
+      </div>
+    </div>
+    <!-- button group -->
+    <div id="source-fields" class="row">
+      {% bootstrap_field form.source layout='vertical' form_group_class='field-wrapper col-12' placeholder='' %}
+    
+      {% bootstrap_field form.source_type layout='vertical' form_group_class='field-wrapper hidden col-12' placeholder='' %}
+
+      {% bootstrap_field form.source_name layout='vertical' form_group_class='field-wrapper hidden col-12' placeholder='' %}
+
+      {% bootstrap_field form.source_title layout='vertical' form_group_class='field-wrapper hidden col-12' placeholder='' %}
+    </div>
+  </div>
+
+  <h3>When and where?</h3>
+  <!-- context fields -->
+  <div class="container field-container">
+    <div class="row">
+      {% bootstrap_field form.claimed_on layout='vertical' form_group_class='field-wrapper col-12 col-md-4' placeholder='' %}
+
+      {% bootstrap_field form.context_description layout='vertical' form_group_class='field-wrapper col-12 col-md-8' placeholder='' %}
+
+      {% bootstrap_field form.context_url layout='vertical' form_group_class='field-wrapper col-12' placeholder='' %}
+    </div>
+  </div>
+
+  <h3>What did they say?</h3>
+  <!-- context fields -->
+  <div class="container field-container">
+    <div class='row'>
+      {% bootstrap_field form.claim layout='vertical' form_group_class='field-wrapper col-12' placeholder='' %}
+
+      {% bootstrap_field form.extra layout='vertical' form_group_class='field-wrapper col-12' placeholder='' %}
+      </div>
+    </div>
+
+  </div>
+  <div id="form-btns" class="container">
+    <input id="submit" type="submit" class="btn btn-outline-primary" value="Submit" />
+    <input id="reset" type="reset" class="btn btn-outline-primary" value="Reset" />
+  </div>
+</form>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" integrity="sha256-I4gvabvvRivuPAYFqevVhZl88+vNf2NksupoBxMQi04=" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js" integrity="sha256-TueWqYu0G+lYIimeIcMI8x1m14QH/DQVt4s9m/uuhPw=" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+  $('.btn-group-toggle label').click( function() {
+
+    if ( $(this).hasClass("active") == false ) {
+
+      $(this).removeClass("btn-outline-info").addClass("btn-info");
+      $(this).parent().find(".btn-info").removeClass("btn-info").addClass("btn-outline-info");
+
+      $('#source-fields').find(".field-wrapper").toggleClass("hidden");
+      $('.field-wrapper').filter('.hidden').find(".form-control").val("");
+      $('.field-wrapper').filter('.hidden').find(".form-control").removeAttr("required");
+    };
+
+    if ( $(this).find("input").attr("id") == 'select' ) {
+          
+      $('#id_source').prop('required', true);
+
+    } else if ( $(this).find("input").attr("id") == 'add-new' ) {
+
+      $('#id_source_type').prop('required', true);
+      $('#id_source_name').prop('required', true);
+
+    };
+
+  });
+
+  $('#id_source_type option').click( function() {
+
+    if ( $(this).val() == 'p' ) {
+      $('#id_source_title').parent().removeClass("hidden");
+    } else if ( $(this).val() == 'o' ) {
+      $('#id_source_title').parent().addClass("hidden");
+    }
+
+  });    
+
+</script>
+
+{% endblock %}

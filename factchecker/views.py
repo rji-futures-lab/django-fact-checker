@@ -1,10 +1,16 @@
-from random import randint
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, HttpResponseRedirect
 from django.utils import timezone
-from django.views.decorators.http import require_safe
-from .models import ClaimReview, ClaimRating
 from django.views.decorators.clickjacking import xframe_options_exempt
+from django.views.decorators.http import require_safe
+from random import randint
+from .forms import ClaimForm
+from .models import (
+    Claim,
+    ClaimRating,
+    ClaimReview,
+    ClaimSource,
+)
 
 
 def get_random_skin_tone():
@@ -16,7 +22,6 @@ def get_random_gender():
     genders = ('♀', '♂')
     rand_int = randint(0, 1)
     return genders[rand_int]
-
 
 def randomize_emoji(emoji_char):
     zero_width_joiner = chr(int('U+200D'[2:], 16))
@@ -72,3 +77,51 @@ def about(request):
         'gender': get_random_gender(),
     }
     return render(request, 'factchecker/about.html', context)
+
+
+@xframe_options_exempt
+def submit_claim(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = ClaimForm(request.POST)
+        
+        if form.is_valid():
+            source = form.cleaned_data.get("source") or ''
+            if source == '':
+                try:
+                    source = ClaimSource.objects.get(
+                        source_type=form.cleaned_data.get("source_type"),
+                        name=form.cleaned_data.get("source_name"),
+                        title=form.cleaned_data.get("source_title"),
+                    )
+                except:
+                    source = ClaimSource.objects.create(
+                        source_type=form.cleaned_data.get("source_type"),
+                        name=form.cleaned_data.get("source_name"),
+                        title=form.cleaned_data.get("source_title"),
+                    )
+
+            Claim.objects.create(
+                source=source,
+                claimed_on=form.cleaned_data.get("claimed_on"),
+                context_description=form.cleaned_data.get("context_description"),
+                context_url=form.cleaned_data.get("context_url"),
+                summary=form.cleaned_data.get("claim"),
+                body=form.cleaned_data.get("extra"),
+            )
+
+            return HttpResponseRedirect('/thanks/')
+        
+        # else?
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = ClaimForm()
+
+    return render(request, 'factchecker/submit-claim.html', {'form': form})
+
+
+@xframe_options_exempt
+def thanks(request):
+    return render(request, 'factchecker/thanks.html')

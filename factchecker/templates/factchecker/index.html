@@ -23,43 +23,43 @@
   </div>
 </div>
 <div class="container">
-{% if claim_review_list %}
-  {% for cr in claim_review_list %}
-    <a href="{% url 'factchecker:detail' cr.id %}" style="text-decoration: none;">
-    <div class="row claim-review-item row">
-      {% if cr.claim.source.image %}
-      <div class="col-sm-3 order-1 image-wrapper">
-        <img
-          class="source-img"
-          src="{{ cr.claim.source.image.url }}"
-          alt="{{ cr.claim.source.name }}"
-        >
+  {% if claim_review_list %}
+    {% for cr in claim_review_list %}
+      <a href="{% url 'factchecker:detail' cr.id %}" style="text-decoration: none;">
+      <div class="row claim-review-item row">
+        {% if cr.claim.source.image %}
+        <div class="col-sm-3 order-1 image-wrapper">
+          <img
+            class="source-img"
+            src="{{ cr.claim.source.image.url }}"
+            alt="{{ cr.claim.source.name }}"
+          >
+        </div>
+        <div class="col-sm-9 col-lg-6 order-2 order-lg-2">
+        {% else %}
+        <div class="col-12 col-lg-9 order-1">
+        {% endif %}
+          <p class="source-name">{{ cr.claim.source.name }}</p>
+          <p class="claim">{{ cr.claim.summary }}</p>
+          <p class="context">– {{ cr.claim.context_description }} ({{ cr.claim.claimed_on }})</span></p>
+        </div>
+        <div class="col-7 col-lg-12 order-3 order-lg-4 rating-summary-label">
+          <h3 class="rating-label {{ cr.rating.css_class }}">{{ cr.rating }}</h3>
+          <p class="rating-summary">{{ cr.summary }} <span class='read-more'>Read more >>></span></p>
+        </div>
+        <div class="col-5 col-lg-3 emoji order-4 order-lg-3">
+          {{ cr.rating.emojis | safe }}{{ skin_tone }}{% if cr.rating.label != "True" %}&#x200D;{{ gender }}{% endif %}
+        </div>
       </div>
-      <div class="col-sm-9 col-lg-6 order-2 order-lg-2">
-      {% else %}
-      <div class="col-12 col-lg-9 order-1">
-      {% endif %}
-        <p class="source-name">{{ cr.claim.source.name }}</p>
-        <p class="claim">{{ cr.claim.summary }}</p>
-        <p class="context">– {{ cr.claim.context_description }} ({{ cr.claim.claimed_on }})</span></p>
-      </div>
-      <div class="col-7 col-lg-12 order-3 order-lg-4 rating-summary-label">
-        <h3 class="rating-label {{ cr.rating.css_class }}">{{ cr.rating }}</h3>
-        <p class="rating-summary">{{ cr.summary }} <span class='read-more'>Read more >>></span></p>
-      </div>
-      <div class="col-5 col-lg-3 emoji-rating order-4 order-lg-3">
-        {{ cr.rating.emojis | safe }}{{ skin_tone }}{% if cr.rating.label != "True" %}&#x200D;{{ gender }}{% endif %}
+      </a>
+    {% endfor %}
+  {% else %}
+    <div class="row">
+      <div class="col-12">
+        <p>No reviewed claims available.</p>
       </div>
     </div>
-    </a>
-  {% endfor %}
-{% else %}
-  <div class="row">
-    <div class="col-12">
-      <p>No reviewed claims available.</p>
-    </div>
-  </div>
-{% endif %}
+  {% endif %}
 </div>
 
 {% endblock %}

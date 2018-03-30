@@ -1,5 +1,25 @@
+{% load staticfiles %}
+{% load static %}
+
 <footer class="footer" aria-label="Footer">
   <div class="container">
-
+    <p>Built in the RJI Futures Lab</p>
+    <img
+      class="img-fluid"
+      src="{% static 'factchecker/img/RJI-stacked-white-with-MU.png' %}"
+      style="max-width: 300px;"
+    >
+    <div id="copyright">
+      <p>
+        Copyright © 2018 - Curators of the <a href="http://missouri.edu/">University of Missouri</a>. All rights reserved.
+      </p>
+      <p>
+        <a href="http://missouri.edu/dmca/">DMCA</a> and other <a
+        href="http://missouri.edu/copyright.php">copyright information</a>. An <a
+        href="http://missouri.edu/eeo-aa.php">equal opportunity/affirmative action</a> institution. <a
+        href="/privacy-policy">Privacy Policy</a>. <a
+        href="/terms-service">Terms of Service</a>.
+      </p>
+    </div>
   </div>
 </footer>

@@ -7,15 +7,33 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'factchecker:index' %}">Home <span class="sr-only">(current)</span></a>
+      <li id="home" class="nav-item">
+        <a class="nav-link" href="{% url 'factchecker:index' %}">Home </a>
       </li>
-      <li class="nav-item">
+      <li id="about" class="nav-item">
         <a class="nav-link" href="{% url 'factchecker:about' %}">About </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Submit a claim </a>
+      <li id="submit-claim" class="nav-item">
+        <a class="nav-link" href="{% url 'factchecker:submit-claim' %}">Tips </a>
       </li>
     </ul>
   </div>
 </nav>
+
+<script type="text/javascript">
+  $(".nav-item").on("click", function(){
+    $(".navbar-nav").find(".active").removeClass("active");
+    $(this).addClass("active");
+  });
+
+  var url = window.location;
+  if (url.pathname == '/') {
+      $('#home').addClass('active');
+  } else if (url.pathname.startsWith("/about")) {
+      $("#about").addClass('active');
+  } else if (url.pathname.startsWith("/submit-claim")) {
+      $('#submit-claim').addClass('active');
+  } else {
+    $(".navbar-nav").find(".active").removeClass("active");
+  }
+</script>

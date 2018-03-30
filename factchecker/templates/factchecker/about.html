@@ -19,7 +19,7 @@
   <div class="row justify-content-center">
     {% for rating in ratings %}
       <div class="col-10">
-        <span class='emoji-rating'>
+        <span class='emoji'>
           {{ rating.emojis|safe }}{{ skin_tone }}{% if rating.label != "True" %}&#x200D;{{ gender }}{% endif %}
         </span>&nbsp;
         <span class="rating-label {{ rating.css_class }}">

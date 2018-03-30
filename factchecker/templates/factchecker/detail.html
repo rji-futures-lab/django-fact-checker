@@ -17,7 +17,7 @@
     <h2>{{ claim_review.claim.summary }}</h2>
     <p class="context">- {{ claim_review.claim.source }}<br>
     {% if claim_review.claim.context_url %}
-      <a href="{{ claim_review.claim.context_url }}">{{ claim_review.claim.context_description }} ({{ claim_review.claim.claimed_on }})</a>
+      <a href="{{ claim_review.claim.context_url }}" target="_blank">{{ claim_review.claim.context_description }} ({{ claim_review.claim.claimed_on }})</a>
     {% else %}
       {{ claim_review.claim.context_description }} ({{ claim_review.claim.claimed_on }})
     {% endif %}
@@ -27,7 +27,7 @@
 <div class="row rating">
   <div class="col-12">
     <h2 class="rating-label-detail {{ claim_review.rating.css_class }}">{{ claim_review.rating.label }}</h2>
-    <h2 class='emoji-rating'>{{ claim_review.rating.emojis|safe }}{{ skin_tone }}{% if claim_review.rating.label != "True" %}&#x200D;{{ gender }}{% endif %}</h2>
+    <h2 class='emoji'>{{ claim_review.rating.emojis|safe }}{{ skin_tone }}{% if claim_review.rating.label != "True" %}&#x200D;{{ gender }}{% endif %}</h2>
     <h5>{{ claim_review.summary }}</h5>
   </div>
 </div>

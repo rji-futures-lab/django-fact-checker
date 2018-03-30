@@ -28,6 +28,7 @@ or ???? https://dribbble.com/shots/4378719-DiOB-Survey
 */
 
 
+/* rating colors */
 .true-color {
     color: #faab12;
 }
@@ -49,7 +50,25 @@ or ???? https://dribbble.com/shots/4378719-DiOB-Survey
 }
 
 
-.emoji-rating {
+/* navbar */
+
+.navbar-nav li {
+    /*border-bottom: 2px solid #343A40;*/
+}
+
+.navbar-nav .active {
+    /*border-bottom: 2px solid #FCFCFC;*/
+    color: #FCFCFC;
+}
+
+.navbar-nav li:hover {
+    /*border-bottom: 2px solid #FCFCFC;*/
+    color: #FCFCFC;
+}
+
+
+
+.emoji {
     text-align: center;
     font-size: 3em;
 }
@@ -106,7 +125,7 @@ or ???? https://dribbble.com/shots/4378719-DiOB-Survey
 }
 
 body {
-  min-height: 75rem;
+  /*min-height: 200rem;*/
   padding-top: 4.5rem;
 }
 
@@ -150,7 +169,7 @@ body {
     .rating-summary, .rating-label {
         text-align: left;
     }
-    .emoji-rating {
+    .emoji {
         font-size: 4em;
     }
     .state-container {
@@ -177,7 +196,7 @@ body {
     .title .lead {
         display: none;
     }
-    .emoji-rating {
+    .emoji {
         font-size: 5em;
     }
     .rating-summary, .rating-label {
@@ -189,7 +208,7 @@ body {
 }
 
 @media (min-width: 768px) {
-    .emoji-rating {
+    .emoji {
         font-size: 6em;
     }
     .state-container {
@@ -214,7 +233,7 @@ body {
 }
 
 @media (min-width: 992px) {
-    .emoji-rating {
+    .emoji {
         font-size: 8em;
     }
     .jumbotron .lead {
@@ -233,7 +252,7 @@ body {
 }
 
 @media (min-width: 1200px) {
-    .emoji-rating {
+    .emoji {
         font-size: 8em;
     }
 }
@@ -244,12 +263,12 @@ body {
     margin-bottom: 20px;
 }
 
-.about h1 {
+.about h1, .tips h1 {
     text-align: center;
     margin-top: 60px;
 }
 
-.about .emoji-rating {
+.about .emoji {
     font-size: 4em;
 }
 
@@ -259,4 +278,72 @@ body {
 
 .definition {
     margin-bottom: 40px;
+}
+
+footer {
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #329BB1;
+    color: #FCFCFC;
+    margin-top: 40px;
+}
+
+#copyright {
+    font-size: .857em;
+}
+
+#copyright a {
+    text-decoration: underline;
+    color: #FCFCFC;
+}
+
+#copyright p {
+    margin-bottom: 0;
+}
+
+form h3 {
+    text-align: center;
+    margin-top: 20px;
+}
+.field-container {
+    border: 1px solid #e5e5e5;
+    padding: 20px;
+}
+
+.field-wrapper label {
+    margin-bottom: 0px;
+}
+
+.field-wrapper {
+    margin-bottom: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+.thanks {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.thanks h5 {
+    margin-bottom: 180px;
+}
+
+.dropdown-menu {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.175);
+}
+
+form .btn-outline-primary {
+    margin-top: 20px;
+}
+
+form .btn-group {
+    margin-bottom: 15px;
+}
+
+#form-btns {
+    text-align: center;
 }

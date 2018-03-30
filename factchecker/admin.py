@@ -20,10 +20,6 @@ class ClaimAdmin(admin.ModelAdmin):
         'context_description',
         'review',
         'claimed_on',
-        'created_by',
-        'created_at',
-        'last_modified_by',
-        'last_modified_at',
     )
 
 
@@ -37,10 +33,6 @@ class ClaimRatingAdmin(admin.ModelAdmin):
         'emojis',
         'definition',
         'sort_order',
-        'created_by',
-        'created_at',
-        'last_modified_by',
-        'last_modified_at',
     )
 
 
@@ -54,10 +46,6 @@ class ClaimReviewAdmin(MarkdownxModelAdmin):
         'rating',
         'summary',
         'published_on',
-        'created_by',
-        'created_at',
-        'last_modified_by',
-        'last_modified_at',
     )
     
 
@@ -68,9 +56,6 @@ class ClaimSourceAdmin(admin.ModelAdmin):
     Custom admin for managing ClaimSource instances.
     """
     list_display = (
+        'source_type',
         'name',
-        'created_by',
-        'created_at',
-        'last_modified_by',
-        'last_modified_at',
     )

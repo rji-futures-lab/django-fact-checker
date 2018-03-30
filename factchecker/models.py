@@ -4,44 +4,13 @@ import lipsum
 from markdownx.models import MarkdownxField
 
 
-class BaseModel(models.Model):
-    """
-    Abstract model with fields common to all fact-checker models.
-    """
-    created_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.PROTECT,
-        related_name="%(class)s_created",
-        related_query_name="%(class)ss_created",
-        help_text='Refers to the user who created the object.',
-    )
-    created_at = models.DateTimeField(
-        auto_now=True,
-        help_text='Date and time when the object was created.',
-    )
-    last_modified_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.PROTECT,
-        related_name="%(class)s_modified",
-        related_query_name="%(class)ss_modified",
-        help_text='Refers to the user who last modified the object.',
-    )
-    last_modified_at = models.DateTimeField(
-        auto_now=True,
-        help_text='Date and time when the object was last modified.',
-    )
-
-    class Meta:
-        abstract = True
-
-
-class ClaimSource(BaseModel):
+class ClaimSource(models.Model):
     """
     Person, organization or other entity that is the source of a reviewable claim.
     """
     SOURCE_TYPE_CHOICES = (
-        ('o', 'Organization'),
         ('p', 'Person'),
+        ('o', 'Organization'),
     )
     source_type = models.CharField(
         max_length=1,
@@ -77,7 +46,7 @@ class ClaimSource(BaseModel):
             return self.name
 
 
-class ClaimRating(BaseModel):
+class ClaimRating(models.Model):
     """
     Possible rating of a claim.
     """
@@ -131,7 +100,7 @@ class ClaimRating(BaseModel):
 if had been entered into the admin interface.' % self.label
 
 
-class Claim(BaseModel):
+class Claim(models.Model):
     source = models.ForeignKey(
         ClaimSource,
         related_name='claims',
@@ -173,7 +142,7 @@ class Claim(BaseModel):
             return False
 
 
-class ClaimReview(BaseModel):
+class ClaimReview(models.Model):
     claim = models.OneToOneField(
         Claim,
         related_name='review',

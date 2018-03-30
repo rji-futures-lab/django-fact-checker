@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'zappa_django_utils',
     'markdownx',
     'markdown_deux',
+    'bootstrap4',
+    'bootstrap_datepicker',
     'factchecker',
 ]
 
