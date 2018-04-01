@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'markdown_deux',
     'bootstrap4',
     'bootstrap_datepicker',
+    'phonenumber_field',
     'factchecker',
 ]
 
@@ -147,6 +148,9 @@ STATIC_URL = "https://%s/.static/" % AWS_S3_CUSTOM_DOMAIN
 MEDIA_URL = "https://%s/.media/" % AWS_S3_CUSTOM_DOMAIN
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+PHONENUMBER_DEFAULT_REGION = 'US'
+PHONENUMBER_DB_FORMAT = 'NATIONAL'
 
 # load local dev settings, if they exist
 try:

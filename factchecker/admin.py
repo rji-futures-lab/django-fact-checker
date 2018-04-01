@@ -6,6 +6,7 @@ from .models import (
     ClaimRating,
     ClaimReview,
     ClaimSource,
+    ClaimSubmitter,
 )
 
 
@@ -20,6 +21,19 @@ class ClaimAdmin(admin.ModelAdmin):
         'context_description',
         'review',
         'claimed_on',
+        'submitter',
+    )
+
+
+@admin.register(ClaimSubmitter)
+class ClaimSubmitterAdmin(admin.ModelAdmin):
+    """
+    Custom admin for managing ClaimSubmitter instances.
+    """
+    list_display = (
+        'name',
+        'email',
+        'phone',
     )
 
 

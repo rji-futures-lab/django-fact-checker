@@ -1,6 +1,7 @@
 from bootstrap_datepicker.widgets import DatePicker
 from django import forms
-from .models import ClaimSource, Claim
+from phonenumber_field.formfields import PhoneNumberField
+from .models import ClaimSource
 
 
 class ClaimForm(forms.Form):
@@ -71,6 +72,22 @@ class ClaimForm(forms.Form):
                   'means, if you can.',
         widget=forms.Textarea,
     )
+    submitter_name = forms.CharField(
+        required=False,
+        label='Your name',
+        help_text='First and last names, please.',
+    )
+    submitter_email = forms.EmailField(
+        required=False,
+        label='Your email',
+        help_text='If you prefer we reach you by email.',
+    )
+    submitter_phone = PhoneNumberField(
+        required=False,
+        label='Your email',
+        help_text='If you prefer we reach you by email.',
+    )
+
 
     def clean(self):
         cleaned_data = super().clean()
@@ -78,8 +95,6 @@ class ClaimForm(forms.Form):
         has_source_selected = bool(self.cleaned_data.get("source"))
         has_source_type = bool(self.cleaned_data.get("source_type"))
         has_source_name = bool(self.cleaned_data.get("source_name"))
-        
-        print(self.errors.as_data())
         
         if not has_source_selected:
             msg = "This field is required when adding a new source."
@@ -92,4 +107,11 @@ class ClaimForm(forms.Form):
             
             del self.errors['source']
 
-        print(self.errors.as_data())
+        has_submitter_name = bool(self.cleaned_data.get("submitter_name"))
+        has_submitter_email = bool(self.cleaned_data.get("submitter_email"))
+        has_submitter_phone = bool(self.cleaned_data.get("submitter_phone"))
+
+        if has_submitter_email or has_submitter_phone:
+            if not has_submitter_name:
+                msg = "Name is required with contact info."
+                self.add_error("submitter_name", msg)                

@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 import lipsum
 from markdownx.models import MarkdownxField
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class ClaimSource(models.Model):
@@ -130,6 +131,13 @@ class Claim(models.Model):
         blank=True,
         help_text='Date on which the claim was made.',
     )
+    submitter = models.ForeignKey(
+        'ClaimSubmitter',
+        related_name='claims_submitted',
+        on_delete=models.SET_NULL,
+        null=True,
+        help_text='Refers to the person who submitted the claim.',
+    )
 
     def __str__(self):
         return "{0} (on {1})".format(self.source.name, self.claimed_on)
@@ -191,3 +199,26 @@ class ClaimReview(models.Model):
             return self.body
         else:
             return lipsum.generate_words(100)
+
+
+class ClaimSubmitter(models.Model):
+    name = models.CharField(
+        max_length=300,
+        help_text='Short statement summarizing the review of the claim.',
+    )
+    email = models.EmailField(
+        blank=True,
+        help_text='Email of claim submitter.',
+    )
+    phone = PhoneNumberField(
+        blank=True,
+        help_text='Phone number of claim submitter.',
+    )
+
+    def __str__(self):
+        if self.name != '':
+            return self.name
+        elif self.email != '':
+            return self.email
+        else:
+            return self.phone

@@ -87,7 +87,7 @@
   </div>
 
   <h3>What did they say?</h3>
-  <!-- context fields -->
+  <!-- claim fields -->
   <div class="container field-container">
     <div class='row'>
       {% bootstrap_field form.claim layout='vertical' form_group_class='field-wrapper col-12' placeholder='' %}
@@ -97,6 +97,21 @@
     </div>
 
   </div>
+
+  <h3>And who are you?</h3>
+  <!-- contact fields fields -->
+  <div class="container field-container">
+    <div class='row'>
+      {% bootstrap_field form.submitter_name layout='vertical' form_group_class='field-wrapper col-12' placeholder='' %}
+
+      {% bootstrap_field form.submitter_email layout='vertical' form_group_class='field-wrapper col-md-6' placeholder='yourname@example.com' %}
+      
+      {% bootstrap_field form.submitter_phone layout='vertical' form_group_class='field-wrapper col-md-6' placeholder='(573) 555-1212' %}
+
+      </div>
+    </div>
+  </div>
+
   <div id="form-btns" class="container">
     <input id="submit" type="submit" class="btn btn-outline-primary" value="Submit" />
     <input id="reset" type="reset" class="btn btn-outline-primary" value="Reset" />

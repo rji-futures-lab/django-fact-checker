@@ -10,6 +10,7 @@ from .models import (
     ClaimRating,
     ClaimReview,
     ClaimSource,
+    ClaimSubmitter,
 )
 
 
@@ -102,6 +103,19 @@ def submit_claim(request):
                         title=form.cleaned_data.get("source_title"),
                     )
 
+            submitter_name = form.cleaned_data.get("submitter_name") or ''
+            submitter_email = form.cleaned_data.get("submitter_email") or ''
+            submitter_phone = form.cleaned_data.get("submitter_phone") or ''
+
+            if submitter_name:
+                submitter = ClaimSubmitter.objects.get_or_create(
+                    name=submitter_name,
+                    email=submitter_email,
+                    phone=submitter_phone,
+                )[0]
+            else:
+                submitter = None
+
             Claim.objects.create(
                 source=source,
                 claimed_on=form.cleaned_data.get("claimed_on"),
@@ -109,6 +123,7 @@ def submit_claim(request):
                 context_url=form.cleaned_data.get("context_url"),
                 summary=form.cleaned_data.get("claim"),
                 body=form.cleaned_data.get("extra"),
+                submitter=submitter,
             )
 
             return HttpResponseRedirect('/thanks/')
