@@ -12,11 +12,15 @@
     <!-- first bootstrap -->
     {% bootstrap_css %}
     <!-- then our own custom css -->
-    <link rel="stylesheet" type="text/css" href="{% static 'factchecker/css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'factchecker/css/main.css' %}" />
+    {% block extracss %}
+    {% endblock %}
 
     <!-- js -->
     <!-- jQuery first, then Popper.js, then bootstrap.js -->
     {% bootstrap_javascript jquery='slim' %}
+    {% block extrajs %}
+    {% endblock %}
 
   </head>
   <body>

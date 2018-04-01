@@ -1,5 +1,20 @@
 {% extends 'factchecker/base.html' %}
 {% load bootstrap4 %}
+{% load static %}
+
+{% block extracss %}
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" integrity="sha256-I4gvabvvRivuPAYFqevVhZl88+vNf2NksupoBxMQi04=" crossorigin="anonymous" />
+
+{% endblock %}
+
+{% block extrajs %}
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js" integrity="sha256-TueWqYu0G+lYIimeIcMI8x1m14QH/DQVt4s9m/uuhPw=" crossorigin="anonymous"></script>
+  <script src="{% static 'factchecker/js/form-btns.js' %}" type="text/javascript"defer></script>
+
+{% endblock %}
+
 
 {% block content %}
 
@@ -87,46 +102,5 @@
     <input id="reset" type="reset" class="btn btn-outline-primary" value="Reset" />
   </div>
 </form>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" integrity="sha256-I4gvabvvRivuPAYFqevVhZl88+vNf2NksupoBxMQi04=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js" integrity="sha256-TueWqYu0G+lYIimeIcMI8x1m14QH/DQVt4s9m/uuhPw=" crossorigin="anonymous"></script>
-
-<script type="text/javascript">
-  $('.btn-group-toggle label').click( function() {
-
-    if ( $(this).hasClass("active") == false ) {
-
-      $(this).removeClass("btn-outline-info").addClass("btn-info");
-      $(this).parent().find(".btn-info").removeClass("btn-info").addClass("btn-outline-info");
-
-      $('#source-fields').find(".field-wrapper").toggleClass("hidden");
-      $('.field-wrapper').filter('.hidden').find(".form-control").val("");
-      $('.field-wrapper').filter('.hidden').find(".form-control").removeAttr("required");
-    };
-
-    if ( $(this).find("input").attr("id") == 'select' ) {
-          
-      $('#id_source').prop('required', true);
-
-    } else if ( $(this).find("input").attr("id") == 'add-new' ) {
-
-      $('#id_source_type').prop('required', true);
-      $('#id_source_name').prop('required', true);
-
-    };
-
-  });
-
-  $('#id_source_type option').click( function() {
-
-    if ( $(this).val() == 'p' ) {
-      $('#id_source_title').parent().removeClass("hidden");
-    } else if ( $(this).val() == 'o' ) {
-      $('#id_source_title').parent().addClass("hidden");
-    }
-
-  });    
-
-</script>
 
 {% endblock %}
