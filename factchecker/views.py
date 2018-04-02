@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, HttpResponseRedirect
 from django.utils import timezone
@@ -38,65 +39,79 @@ def randomize_emoji(emoji_char):
 
     return combine
 
+
+def coming_soon(request):
+    context = {
+        'skin_tone': get_random_skin_tone(),
+        'gender': get_random_gender(),
+        'url': request.build_absolute_uri(),
+        'ogtype': "website",
+        'login_url': '%s?next=/' % settings.LOGIN_URL,
+        'title': "Coming soon...",
+        'description': "This site is still a work in progress. Please check back later.",
+    }
+    return render(request, 'factchecker/coming-soon.html', context)
+
+
 @require_safe
-@login_required
+@login_required(login_url='/coming-soon/')
 @xframe_options_exempt
 def index(request):
-    if not request.user.is_authenticated:
-        return render(request, 'factchecker/coming-soon.html')
-    else:    
-        claim_review_list = ClaimReview.objects.filter(
-            published_on__lte=timezone.now()
-        ).order_by('-published_on')
+    claim_review_list = ClaimReview.objects.filter(
+        published_on__lte=timezone.now()
+    ).order_by('-published_on')
 
-        context = {
-            'claim_review_list': claim_review_list,
-            'skin_tone': get_random_skin_tone(),
-            'gender': get_random_gender(),
-            'title': "Missouri Education Fact Checker",
-            'description': "Setting the record straight on education-related issues in Missouri.",
-            'url': request.build_absolute_uri(),
-            'ogtype': "website",
-        }
+    context = {
+        'skin_tone': get_random_skin_tone(),
+        'gender': get_random_gender(),
+        'url': request.build_absolute_uri(),
+        'ogtype': "website",
+        'claim_review_list': claim_review_list,
+        'title': "Missouri Education Fact Checker",
+        'description': "Setting the record straight on education-related issues in Missouri.",
+    }
 
-        return render(request, 'factchecker/index.html', context)
+    return render(request, 'factchecker/index.html', context)
 
 
 @require_safe
-@login_required
+@login_required(login_url='/coming-soon/')
 @xframe_options_exempt
 def detail(request, claim_review_id):
     claim_review = get_object_or_404(ClaimReview, pk=claim_review_id)
 
     context = {
-        'claim_review': claim_review,
         'skin_tone': get_random_skin_tone(),
         'gender': get_random_gender(),
-        'title': claim_review.claim,
-        'description': "{0}: {1}".format(
-            claim_review.rating.label.upper(),
-            claim_review.summary,
-        ),
         'url': request.build_absolute_uri(),
+        'claim_review': claim_review,
+        'title': claim_review.claim,
         'ogtype': "article",
     }
+
+    context['description'] = "{0}: {1}".format(
+        claim_review.rating.label.upper(),
+        claim_review.summary,
+    )
     
     return render(request, 'factchecker/detail.html', context)
 
 
 @require_safe
-@login_required
+@login_required(login_url='/coming-soon/')
 @xframe_options_exempt
 def about(request):
     context = {
-        'ratings': ClaimRating.objects.all(),
         'skin_tone': get_random_skin_tone(),
         'gender': get_random_gender(),
+        'url': request.build_absolute_uri(),
+        'ratings': ClaimRating.objects.all(),
         'title': "About our project",
         'description': "Learn more about the Missouri Education Fact Checker.",
         'url': request.build_absolute_uri(),
         'ogtype': "article",
     }
+
     return render(request, 'factchecker/about.html', context)
 
 
@@ -166,4 +181,12 @@ def submit_claim(request):
 
 @xframe_options_exempt
 def thanks(request):
-    return render(request, 'factchecker/thanks.html')
+    context = {
+        'skin_tone': get_random_skin_tone(),
+        'url': request.build_absolute_uri(),
+        'ogtype': "website",
+        'title': "Thanks!",
+        'description': "We appreciate the tip. We'll look into this, so check back again later.",
+    }
+        
+    return render(request, 'factchecker/thanks.html', context)

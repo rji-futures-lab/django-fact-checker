@@ -1,5 +1,12 @@
 from django.urls import include, path, re_path
-from .views import index, detail, about, submit_claim, thanks
+from .views import (
+    index,
+    detail,
+    about,
+    submit_claim,
+    thanks,
+    coming_soon,
+)
 
 
 app_name = 'factchecker'
@@ -9,4 +16,5 @@ urlpatterns = [
     path('<int:claim_review_id>/', detail, name='detail'),
     path('submit-claim/', submit_claim, name='submit-claim'),
     path('thanks/', thanks, name='thanks'),
+    path('coming-soon/', coming_soon, name='coming-soon')
 ]

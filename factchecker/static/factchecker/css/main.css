@@ -335,12 +335,12 @@ form h3 {
     display: none;
 }
 
-.thanks {
+.thanks, .coming-soon {
     text-align: center;
     margin-top: 100px;
 }
 
-.thanks h5 {
+.thanks h5, .coming-soon h5 {
     margin-bottom: 180px;
 }
 
