@@ -181,6 +181,10 @@ body {
     .title .lead {
         display: none;
     }
+    .title-sm {
+        display: unset;
+        text-align: center;
+    }
     .claim-detail h2 {
         font-size: 26px;
     }
@@ -195,6 +199,10 @@ body {
     }
     .title .lead {
         display: none;
+    }
+    .title-sm {
+        display: unset;
+        text-align: center;
     }
     .emoji {
         font-size: 5em;
@@ -217,12 +225,11 @@ body {
     .rating-summary, .rating-label {
         text-align: center;
     }
-    .jumbotron .lead {
-        text-align: center;
-        display: unset;
+    .title-sm {
+        display: none;
     }
     .title .lead {
-        display: none;
+        display: unset;
     }
     .title h1 {
         text-align: left;
@@ -236,8 +243,7 @@ body {
     .emoji {
         font-size: 8em;
     }
-    .jumbotron .lead {
-        text-align: center;
+    .title-sm {
         display: none;
     }
     .title .lead {
@@ -254,6 +260,12 @@ body {
 @media (min-width: 1200px) {
     .emoji {
         font-size: 8em;
+    }
+    .title-sm {
+        display: none;
+    }
+    .title .lead {
+        display: unset;
     }
 }
 
@@ -293,7 +305,7 @@ footer {
     font-size: .857em;
 }
 
-#copyright a {
+footer a {
     text-decoration: underline;
     color: #FCFCFC;
 }

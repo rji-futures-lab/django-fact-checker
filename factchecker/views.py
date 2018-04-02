@@ -42,27 +42,43 @@ def randomize_emoji(emoji_char):
 @login_required
 @xframe_options_exempt
 def index(request):
-    claim_review_list = ClaimReview.objects.filter(
-        published_on__lte=timezone.now()
-    ).order_by('-published_on')
+    if not request.user.is_authenticated:
+        return render(request, 'factchecker/coming-soon.html')
+    else:    
+        claim_review_list = ClaimReview.objects.filter(
+            published_on__lte=timezone.now()
+        ).order_by('-published_on')
 
-    context = {
-        'claim_review_list': claim_review_list,
-        'skin_tone': get_random_skin_tone(),
-        'gender': get_random_gender(),
-    }
+        context = {
+            'claim_review_list': claim_review_list,
+            'skin_tone': get_random_skin_tone(),
+            'gender': get_random_gender(),
+            'title': "Missouri Education Fact Checker",
+            'description': "Setting the record straight on education-related issues in Missouri.",
+            'url': request.build_absolute_uri(),
+            'ogtype': "website",
+        }
 
-    return render(request, 'factchecker/index.html', context)
+        return render(request, 'factchecker/index.html', context)
 
 
 @require_safe
 @login_required
 @xframe_options_exempt
 def detail(request, claim_review_id):
+    claim_review = get_object_or_404(ClaimReview, pk=claim_review_id)
+
     context = {
-        'claim_review': get_object_or_404(ClaimReview, pk=claim_review_id),
+        'claim_review': claim_review,
         'skin_tone': get_random_skin_tone(),
         'gender': get_random_gender(),
+        'title': claim_review.claim,
+        'description': "{0}: {1}".format(
+            claim_review.rating.label.upper(),
+            claim_review.summary,
+        ),
+        'url': request.build_absolute_uri(),
+        'ogtype': "article",
     }
     
     return render(request, 'factchecker/detail.html', context)
@@ -76,12 +92,23 @@ def about(request):
         'ratings': ClaimRating.objects.all(),
         'skin_tone': get_random_skin_tone(),
         'gender': get_random_gender(),
+        'title': "About our project",
+        'description': "Learn more about the Missouri Education Fact Checker.",
+        'url': request.build_absolute_uri(),
+        'ogtype': "article",
     }
     return render(request, 'factchecker/about.html', context)
 
 
 @xframe_options_exempt
 def submit_claim(request):
+    context = {
+        'title': "Submit a claim",
+        'description': "Help us fact check education-related issues in Missouri.",
+        'url': request.build_absolute_uri(),
+        'ogtype': "website",
+    }
+
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -127,14 +154,14 @@ def submit_claim(request):
             )
 
             return HttpResponseRedirect('/thanks/')
-        
-        # else?
 
     # if a GET (or any other method) we'll create a blank form
     else:
         form = ClaimForm()
 
-    return render(request, 'factchecker/submit-claim.html', {'form': form})
+    context['form'] = form
+
+    return render(request, 'factchecker/submit-claim.html', context)
 
 
 @xframe_options_exempt
