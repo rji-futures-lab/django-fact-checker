@@ -136,6 +136,7 @@ class Claim(models.Model):
         related_name='claims_submitted',
         on_delete=models.SET_NULL,
         null=True,
+        blank=True,
         help_text='Refers to the person who submitted the claim.',
     )
 
