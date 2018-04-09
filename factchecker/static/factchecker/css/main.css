@@ -67,10 +67,10 @@ or ???? https://dribbble.com/shots/4378719-DiOB-Survey
 }
 
 
-
 .emoji {
     text-align: center;
     font-size: 3em;
+    font-family: apple color emoji,segoe ui emoji,notocoloremoji,segoe ui symbol,android emoji,emojisymbols,emojione mozilla;
 }
 
 #navbarCollapse {
