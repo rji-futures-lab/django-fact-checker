@@ -50,7 +50,7 @@ def coming_soon(request):
         'title': "Coming soon...",
         'description': "This site is still a work in progress. Please check back later.",
     }
-    return render(request, 'factchecker/coming-soon.html', context)
+    return render(request, 'factchecker/coming_soon.html', context)
 
 
 @require_safe
@@ -176,7 +176,7 @@ def submit_claim(request):
 
     context['form'] = form
 
-    return render(request, 'factchecker/submit-claim.html', context)
+    return render(request, 'factchecker/submit_claim.html', context)
 
 
 @xframe_options_exempt
