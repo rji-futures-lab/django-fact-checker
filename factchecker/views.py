@@ -25,21 +25,6 @@ def get_random_gender():
     rand_int = randint(0, 1)
     return genders[rand_int]
 
-def randomize_emoji(emoji_char):
-    zero_width_joiner = chr(int('U+200D'[2:], 16))
-    variation_select_char = chr(int('U+FE0F'[2:], 16))
-
-    combine = ''.join([
-        emoji_char,
-        get_random_skin_tone(),
-        zero_width_joiner,
-        get_random_gender(),
-        variation_select_char
-    ])
-
-    return combine
-
-
 def coming_soon(request):
     context = {
         'skin_tone': get_random_skin_tone(),
