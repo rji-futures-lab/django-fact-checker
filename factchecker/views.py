@@ -4,7 +4,6 @@ from django.shortcuts import get_object_or_404, render, HttpResponseRedirect
 from django.utils import timezone
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.decorators.http import require_safe
-from random import randint
 from .forms import ClaimForm
 from .models import (
     Claim,
@@ -13,17 +12,8 @@ from .models import (
     ClaimSource,
     ClaimSubmitter,
 )
+from .utils import get_random_gender, get_random_skin_tone
 
-
-def get_random_skin_tone():
-    skin_tones = ('🏻', '🏼', '🏽', '🏾', '🏿',)
-    rand_int = randint(0, 4)
-    return skin_tones[rand_int]
-
-def get_random_gender():
-    genders = ('♀', '♂')
-    rand_int = randint(0, 1)
-    return genders[rand_int]
 
 def coming_soon(request):
     context = {
