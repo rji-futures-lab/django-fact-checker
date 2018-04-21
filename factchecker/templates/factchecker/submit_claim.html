@@ -1,6 +1,5 @@
 {% extends 'factchecker/base.html' %}
-{% load bootstrap4 %}
-{% load static %}
+{% load bootstrap4 static emoji_tags %}
 
 {% block extracss %}
 
@@ -38,7 +37,7 @@
         We can't promise to get to the bottom of every claim that floats our way. However, we will be honest and transparent when publish our findings.
       </p>
       <p>
-        We 💖 your help. Thank you. 🙏
+        We 💖 your help. Thank you. {{ '🙏'|randomize_skin_tone }}
       </p>
     </div>
   </div>
