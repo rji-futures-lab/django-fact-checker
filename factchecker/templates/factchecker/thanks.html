@@ -1,13 +1,16 @@
 {% extends 'factchecker/base.html' %}
+{% load emoji_tags %}
 
 {% block content %}
+
 <div class="container thanks">
   <div class="row justify-content-center">
     <div class="col-10">
       <h1>Awesome!</h1>
-      <div class="emoji">🙌{{ skin_tone }}</div>
+      <div class="emoji">{{ '🙌'|randomize_skin_tone }}</div>
       <h5><a href="{% url 'factchecker:submit_claim' %}">Add another?</a></h5>
     </div>
   </div>
 </div>
+
 {% endblock %}

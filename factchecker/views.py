@@ -1,9 +1,14 @@
+from random import randint
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, render, HttpResponseRedirect
 from django.utils import timezone
+from django.utils.decorators import method_decorator
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.decorators.http import require_safe
+from django.views.generic import DetailView, ListView
+from django.views.generic.base import TemplateView
 from .forms import ClaimForm
 from .models import (
     Claim,
@@ -12,82 +17,109 @@ from .models import (
     ClaimSource,
     ClaimSubmitter,
 )
-from .utils import get_random_gender, get_random_skin_tone
 
 
-def coming_soon(request):
-    context = {
-        'skin_tone': get_random_skin_tone(),
-        'gender': get_random_gender(),
-        'url': request.build_absolute_uri(),
-        'ogtype': "website",
-        'login_url': '%s?next=/' % settings.LOGIN_URL,
-        'title': "Coming soon...",
-        'description': "This site is still a work in progress. Please check back later.",
-    }
-    return render(request, 'factchecker/coming_soon.html', context)
+decorators = [require_safe, xframe_options_exempt]
 
 
-@require_safe
-@login_required(login_url='/coming-soon/')
-@xframe_options_exempt
-def index(request):
-    claim_review_list = ClaimReview.objects.filter(
+@method_decorator(decorators, name='dispatch')
+class ComingSoonView(TemplateView):
+    """
+    Renders the Coming Soon page.
+    """
+
+    template_name = "factchecker/coming_soon.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['url'] = self.request.build_absolute_uri()
+        context['ogtype'] = "website"
+        context['login_url'] = '%s?next=/' % settings.LOGIN_URL
+        context['title'] = "Coming soon..."
+        context['description'] = "This site is still a work in progress. Please check back later."
+
+        return context
+
+
+@method_decorator(decorators, name='dispatch')
+class PublishedClaimReviewListView(LoginRequiredMixin, ListView):
+    """
+    Renders a list of published claim reviews.
+    """
+
+    login_url = '/coming-soon/'
+    queryset = ClaimReview.objects.filter(
         published_on__lte=timezone.now()
     ).order_by('-published_on')
 
-    context = {
-        'skin_tone': get_random_skin_tone(),
-        'gender': get_random_gender(),
-        'url': request.build_absolute_uri(),
-        'ogtype': "website",
-        'claim_review_list': claim_review_list,
-        'title': "Missouri Education Fact Checker",
-        'description': "Setting the record straight on education-related issues in Missouri.",
-    }
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['url'] = self.request.build_absolute_uri()
+        context['ogtype'] = "website"
+        context['title']: "Missouri Education Fact Checker"
+        context['description']: "Setting the record straight on education-related issues in Missouri."
 
-    return render(request, 'factchecker/index.html', context)
+        return context
 
 
-@require_safe
-@login_required(login_url='/coming-soon/')
-@xframe_options_exempt
-def detail(request, claim_review_id):
-    claim_review = get_object_or_404(ClaimReview, pk=claim_review_id)
+@method_decorator(decorators, name='dispatch')
+class PublishedClaimReviewDetailView(LoginRequiredMixin, DetailView):
+    """
+    Renders details of a published claim review.
+    """
 
-    context = {
-        'skin_tone': get_random_skin_tone(),
-        'gender': get_random_gender(),
-        'url': request.build_absolute_uri(),
-        'claim_review': claim_review,
-        'title': claim_review.claim,
-        'ogtype': "article",
-    }
-
-    context['description'] = "{0}: {1}".format(
-        claim_review.rating.label.upper(),
-        claim_review.summary,
+    login_url = '/coming-soon/'
+    queryset = ClaimReview.objects.filter(
+        published_on__lte=timezone.now()
     )
-    
-    return render(request, 'factchecker/detail.html', context)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['url'] = self.request.build_absolute_uri()
+        context['ogtype'] = "article"
+        context['title']: claim_review.claim
+        context['description']: "{0}: {1}".format(
+            claim_review.rating.label.upper(),
+            claim_review.summary,
+        )
+
+        return context
 
 
-@require_safe
-@login_required(login_url='/coming-soon/')
-@xframe_options_exempt
-def about(request):
-    context = {
-        'skin_tone': get_random_skin_tone(),
-        'gender': get_random_gender(),
-        'url': request.build_absolute_uri(),
-        'ratings': ClaimRating.objects.all(),
-        'title': "About our project",
-        'description': "Learn more about the Missouri Education Fact Checker.",
-        'url': request.build_absolute_uri(),
-        'ogtype': "article",
-    }
+@method_decorator(decorators, name='dispatch')
+class ClaimRatingListView(LoginRequiredMixin, ListView):
+    """
+    Renders the about page.
+    """
+    model = ClaimRating
+    login_url = '/coming-soon/'
 
-    return render(request, 'factchecker/about.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['url'] = self.request.build_absolute_uri()
+        context['ogtype'] = "article"
+        context['title'] = "About our project"
+        context['description'] = "Learn more about the Missouri Education Fact Checker.",
+
+        return context
+
+
+@method_decorator(decorators, name='dispatch')
+class ThanksView(TemplateView):
+    """
+    Renders the Coming Soon page.
+    """
+
+    template_name = "factchecker/thanks.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['url'] = self.request.build_absolute_uri()
+        context['ogtype'] = "website"
+        context['title'] = "Thanks!"
+        context['description'] = "We appreciate the tip. We'll look into this, so check back again later."
+
+        return context
 
 
 @xframe_options_exempt
@@ -152,16 +184,3 @@ def submit_claim(request):
     context['form'] = form
 
     return render(request, 'factchecker/submit_claim.html', context)
-
-
-@xframe_options_exempt
-def thanks(request):
-    context = {
-        'skin_tone': get_random_skin_tone(),
-        'url': request.build_absolute_uri(),
-        'ogtype': "website",
-        'title': "Thanks!",
-        'description': "We appreciate the tip. We'll look into this, so check back again later.",
-    }
-        
-    return render(request, 'factchecker/thanks.html', context)

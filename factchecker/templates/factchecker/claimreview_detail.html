@@ -1,0 +1,46 @@
+{% extends 'factchecker/base.html' %}
+{% load markdown_deux_tags emoji_tags %}
+
+{% block content %}
+<div class="container">
+<div class="row">
+  {% if claimreview.claim.source.image %}
+  <div class="col-12 col-md-4">
+    <img
+      class="source-img"
+      src="{{ claimreview.claim.source.image.url }}"
+      alt="{{ claimreview.claim.source }}"
+    >
+  </div>
+  {% endif %}
+  <div class="col-12 col-md-8 claim-detail">
+    <h2>{{ claimreview.claim.summary }}</h2>
+    <p class="context">- {{ claimreview.claim.source }}<br>
+    {% if claimreview.claim.context_url %}
+      <a href="{{ claimreview.claim.context_url }}" target="_blank">{{ claimreview.claim.context_description }} ({{ claimreview.claim.claimed_on }})</a>
+    {% else %}
+      {{ claimreview.claim.context_description }} ({{ claimreview.claim.claimed_on }})
+    {% endif %}
+    </p>
+  </div>
+</div>
+<div class="row rating">
+  <div class="col-12">
+    <h2 class="rating-label-detail {{ claimreview.rating.css_class }}">{{ claimreview.rating.label }}</h2>
+    <h2 class='emoji'>
+      {% if claimreview.rating.label == "True" %}
+      {{ claimreview.rating.emojis|randomize_skin_tone }}
+      {% else %}
+      {{ claimreview.rating.emojis|randomize_gender_and_skin_tone }}
+      {% endif %}
+    </h2>
+    <h5>{{ claimreview.summary }}</h5>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    {{ claimreview.body_or_lipsum|markdown }}
+  </div>
+</div>
+</div>
+{% endblock %}

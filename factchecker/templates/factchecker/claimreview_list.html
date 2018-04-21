@@ -1,6 +1,10 @@
 {% extends 'factchecker/base.html' %}
-{% load static %}
+{% load emoji_tags static %}
+
 {% block content %}
+
+{% random_gender as gender %}
+{% random_skin_tone as skin_tone %}
 
 <div class="jumbotron">
   <div class="container">
@@ -23,8 +27,8 @@
   </div>
 </div>
 <div class="container">
-  {% if claim_review_list %}
-    {% for cr in claim_review_list %}
+  {% if claimreview_list %}
+    {% for cr in claimreview_list %}
       <a href="{% url 'factchecker:detail' cr.id %}" style="text-decoration: none;">
       <div class="row claim-review-item row">
         {% if cr.claim.source.image %}
@@ -48,7 +52,11 @@
           <p class="rating-summary">{{ cr.summary }} <span class='read-more'>Read more >>></span></p>
         </div>
         <div class="col-5 col-lg-3 emoji order-4 order-lg-3">
-          {{ cr.rating.emojis | safe }}{{ skin_tone }}{% if cr.rating.label != "True" %}&zwj;{{ gender }}️{% endif %}
+          {% if cr.rating.label == "True" %}
+          {{ cr.rating.emojis }}{{ skin_tone }}&#xfe0f;
+          {% else %}
+          {{ cr.rating.emojis }}{{ skin_tone }}&zwj;{{ gender }}&#xfe0f;
+          {% endif %}
         </div>
       </div>
       </a>

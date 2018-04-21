@@ -1,6 +1,11 @@
 {% extends 'factchecker/base.html' %}
+{% load emoji_tags %}
 
 {% block content %}
+
+{% random_gender as gender %}
+{% random_skin_tone as skin_tone %}
+
 <div class="container about">
   <div class="row justify-content-center">
     <div class="col-10">
@@ -17,10 +22,14 @@
     </div>
   </div>
   <div class="row justify-content-center">
-    {% for rating in ratings %}
+    {% for rating in claimrating_list %}
       <div class="col-10">
         <span class='emoji'>
-          {{ rating.emojis|safe }}{{ skin_tone }}{% if rating.label != "True" %}&zwj;{{ gender }}{% endif %}
+          {% if rating.label == "True" %}
+            {{ rating.emojis }}{{ skin_tone }}&#xfe0f;
+          {% else %}
+            {{ rating.emojis }}{{ skin_tone }}&zwj;{{ gender }}&#xfe0f;
+          {% endif %}
         </span>&nbsp;
         <span class="rating-label {{ rating.css_class }}">
           {{ rating.label }}
@@ -31,4 +40,5 @@
     </div>
   </div>
 </div>
+
 {% endblock %}
