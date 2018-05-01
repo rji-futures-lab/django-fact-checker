@@ -45,8 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
+    'django.contrib.humanize',
     'django.contrib.messages',
+    'django.contrib.sessions',
     'django.contrib.staticfiles',
     'storages',
     'zappa_django_utils',
@@ -81,6 +82,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'factchecker.context_processors.custom_website_metadata',
             ],
         },
     },
@@ -151,6 +153,13 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 PHONENUMBER_DEFAULT_REGION = 'US'
 PHONENUMBER_DB_FORMAT = 'NATIONAL'
+
+CUSTOM_WEBSITE_TITLE = "Missouri Education Fact Checker"
+CUSTOM_WEBSITE_DESCRIPTION = "Setting the record straight on education-related\
+ issues in Missouri."
+# CUSTOM_WEBSITE_SHARE_IMG = 
+TWITTER_HANDLE = "@RJIFuturesLab"
+
 
 # load local dev settings, if they exist
 try:

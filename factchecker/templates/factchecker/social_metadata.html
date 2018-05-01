@@ -1,0 +1,36 @@
+<!-- facebook open-graph -->
+<meta 
+  property="og:type" 
+  content="{% block og_type %}website{% endblock og_type %}"
+/>
+<meta
+  property="og:title" 
+  content="{% block og_title %}{{ CUSTOM_WEBSITE_TITLE }}{% endblock og_title %}"
+/>
+<meta
+    property="og:description"
+    content="{% block og_description %}{{ CUSTOM_WEBSITE_DESCRIPTION }}{% endblock og_description %}"
+/>
+<meta property="og:url" content="{{ url }}" />
+<meta 
+  property="og:image"
+  content="{% block og_image %}{{ CUSTOM_WEBSITE_SHARE_IMG }}{% endblock og_image %}"
+/>
+<meta property="og:image:width" content="1004" />
+<meta property="og:image:height" content="527" />
+
+<!-- twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property"twitter:site" content="{{ TWITTER_HANDLE }}" />
+<meta
+  property="twitter:title"
+  content="{% block twitter_title %}{{ CUSTOM_WEBSITE_TITLE }}{% endblock twitter_title %}"
+/>
+<meta 
+  property="twitter:description"
+  content="{% block twitter_description %}{{ CUSTOM_WEBSITE_DESCRIPTION }}{% endblock twitter_description %}"
+/>
+<meta
+  property="twitter:image:src"
+  content="{% block twitter_image %}{{ CUSTOM_WEBSITE_SHARE_IMG }}{% endblock twitter_image %}"
+/>

@@ -1,19 +1,24 @@
 {% extends 'factchecker/base.html' %}
 {% load bootstrap4 static emoji_tags %}
 
-{% block extracss %}
+{% block title %}Submit a claim{% endblock title %}
 
+{% block description %}Help us fact check education-related issues in Missouri.{% endblock description %}
+
+{% block stylesheets %}
+  
+  {{ block.super }}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" integrity="sha256-I4gvabvvRivuPAYFqevVhZl88+vNf2NksupoBxMQi04=" crossorigin="anonymous" />
 
-{% endblock %}
+{% endblock stylesheets %}
 
-{% block extrajs %}
+{% block javascript %}
 
+  {{ block.super }}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js" integrity="sha256-TueWqYu0G+lYIimeIcMI8x1m14QH/DQVt4s9m/uuhPw=" crossorigin="anonymous"></script>
   <script src="{% static 'factchecker/js/form-btns.js' %}" type="text/javascript"defer></script>
 
-{% endblock %}
-
+{% endblock javascript %}
 
 {% block content %}
 
@@ -91,7 +96,7 @@
     <div class='row'>
       {% bootstrap_field form.claim layout='vertical' form_group_class='field-wrapper col-12' placeholder='' %}
 
-      {% bootstrap_field form.extra layout='vertical' form_group_class='field-wrapper col-12' placeholder='' %}
+      {% bootstrap_field form.note layout='vertical' form_group_class='field-wrapper col-12' placeholder='' %}
       </div>
     </div>
 
@@ -117,4 +122,4 @@
   </div>
 </form>
 
-{% endblock %}
+{% endblock content %}

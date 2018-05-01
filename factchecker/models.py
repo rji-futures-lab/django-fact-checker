@@ -1,13 +1,15 @@
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.db import models
-import lipsum
+from django.utils import timezone
+from django.utils.translation import gettext as _
 from markdownx.models import MarkdownxField
 from phonenumber_field.modelfields import PhoneNumberField
 
 
 class ClaimSource(models.Model):
     """
-    Person, organization or other entity that is the source of a reviewable claim.
+    Person, organization or other entity that's a source of reviewable claims.
     """
     SOURCE_TYPE_CHOICES = (
         ('p', 'Person'),
@@ -15,7 +17,7 @@ class ClaimSource(models.Model):
     )
     source_type = models.CharField(
         max_length=1,
-        choices = SOURCE_TYPE_CHOICES,
+        choices=SOURCE_TYPE_CHOICES,
         help_text="Type of source (e.g., 'Person' or 'Organization').",
     )
     name = models.CharField(
@@ -60,13 +62,10 @@ class ClaimRating(models.Model):
         blank=True,
         help_text="Definition of the rating.",
     )
-    image = models.ImageField(
-        blank=True,
+    image = models.FileField(
         upload_to='claim-rating-images/',
-        # https://docs.djangoproject.com/en/2.0/ref/models/fields/#django.db.models.ImageField.height_field
-        # height_field=100, ???
-        # width_field=100, ???
-        help_text='Image file representing the rating of a claim.',
+        blank=True,
+        help_text='Image file representing the rating.',
     )
     emojis = models.CharField(
         max_length=20,
@@ -184,14 +183,23 @@ class ClaimReview(models.Model):
         )
 
     @property
-    def body_or_lipsum(self):
-        """
-        Return the body text (if it exists), otherwise Lorem Ipsum text.
-        """
-        if not self.body == '':
-            return self.body
+    def is_published(self):
+        """Return True if the review has been published."""
+        now = timezone.now()
+        try:
+            return now > self.published_on
+        except TypeError:
+            return False
+
+    @property
+    def published_within_last_24_hours(self):
+        """Returns True if the review was published today."""
+        if self.is_published:
+            now = timezone.now()
+            delta = now - self.published_on
+            return delta.days == 0
         else:
-            return lipsum.generate_words(100)
+            return False
 
 
 class ClaimSubmitter(models.Model):
@@ -209,9 +217,15 @@ class ClaimSubmitter(models.Model):
     )
 
     def __str__(self):
-        if self.name != '':
-            return self.name
-        elif self.email != '':
-            return self.email
-        else:
-            return self.phone
+        return self.name
+
+    def clean(self):
+        """
+        If ClaimSubmitter has neither phone or email, raise ValidationError.
+        """
+        if not ( bool(self.email) or bool(self.phone) ):
+            msg = 'Please provide either a phone or email.'
+            raise ValidationError({
+                'email': ValidationError(_(msg), code='required'),
+                'phone': ValidationError(_(msg), code='required'),
+            })

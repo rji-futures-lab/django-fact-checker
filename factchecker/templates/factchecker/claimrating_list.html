@@ -1,9 +1,14 @@
 {% extends 'factchecker/base.html' %}
 {% load emoji_tags %}
 
+{% block title %}About our project{% endblock title %}
+
+{% block description %}Learn more about the Missouri Education Fact Checker.{% endblock description %}
+
+{% block og_type %}article{% endblock og_type %}
+
 {% block content %}
 
-{% random_gender as gender %}
 {% random_skin_tone as skin_tone %}
 
 <div class="container about">
@@ -24,16 +29,18 @@
   <div class="row justify-content-center">
     {% for rating in claimrating_list %}
       <div class="col-10">
-        <span class='emoji'>
-          {% if rating.label == "True" %}
-            {{ rating.emojis }}{{ skin_tone }}&#xfe0f;
-          {% else %}
-            {{ rating.emojis }}{{ skin_tone }}&zwj;{{ gender }}&#xfe0f;
-          {% endif %}
-        </span>&nbsp;
-        <span class="rating-label {{ rating.css_class }}">
-          {{ rating.label }}
-        </span>
+        <div class="row justify-content-start">
+          <div class="col-4 col-md-3 col-lg-2">
+            <img
+              class='rating-icon mx-md-auto'
+              src="{{ rating.image.url }}"
+              lt="{{ rating.label }} icon"
+            >
+          </div>
+          <div 
+            class="col-8 col-md-9 col-lg-10 rating-label px-0 {{ rating.css_class }}"
+          >{{ rating.label }}</div>
+        </div>
       </div>
       <div class="col-10 definition">{{ rating.definition }}</div>
     {% endfor %}
@@ -41,4 +48,4 @@
   </div>
 </div>
 
-{% endblock %}
+{% endblock content %}

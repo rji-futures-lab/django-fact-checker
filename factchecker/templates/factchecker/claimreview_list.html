@@ -1,10 +1,8 @@
 {% extends 'factchecker/base.html' %}
 {% load emoji_tags static %}
+{% load humanize %}
 
 {% block content %}
-
-{% random_gender as gender %}
-{% random_skin_tone as skin_tone %}
 
 <div class="jumbotron">
   <div class="container">
@@ -18,49 +16,62 @@
       </div>
       <div class='col-12 col-md-8 title'>
         <h1 class="display-4"><span class="yellow-font">Missouri Education</span> Fact Checker</h1>
-        <p class="lead">{{ description }}</p>
+        <p class="lead">{{ CUSTOM_WEBSITE_DESCRIPTION }}</p>
       </div>
       <div class="col-12">
-        <p class="lead title-sm">{{ description }}</p>
+        <p class="lead title-sm">{{ CUSTOM_WEBSITE_DESCRIPTION }}</p>
       </div>
     </div>
   </div>
 </div>
 <div class="container">
   {% if claimreview_list %}
+    <div class="row justify-content-around">
     {% for cr in claimreview_list %}
-      <a href="{% url 'factchecker:detail' cr.id %}" style="text-decoration: none;">
-      <div class="row claim-review-item row">
+      <div class="review-item-box col-12 col-md-5 col-lg-4 mx-md-1 mb-4 px-0">
+        <a class="review-item-link" href="{% url 'factchecker:detail' cr.id %}">
         {% if cr.claim.source.image %}
-        <div class="col-sm-3 order-1 image-wrapper">
           <img
-            class="source-img"
+            class="source-image"
             src="{{ cr.claim.source.image.url }}"
-            alt="{{ cr.claim.source.name }}"
+            alt="{{ cr.source }}"
           >
-        </div>
-        <div class="col-sm-9 col-lg-6 order-2 order-lg-2">
-        {% else %}
-        <div class="col-12 col-lg-9 order-1">
         {% endif %}
-          <p class="source-name">{{ cr.claim.source.name }}</p>
-          <p class="claim">{{ cr.claim.summary }}</p>
-          <p class="context">– {{ cr.claim.context_description }} ({{ cr.claim.claimed_on }})</span></p>
+        <div class="review-item-body px-3 py-3">
+          <blockquote class="blockquote mb-6">
+            <p>{{ cr.claim.summary }}</p>
+            <footer class="blockquote-footer">{{ cr.claim.source.name }}
+              <cite title="Context"><br>
+                ({{ cr.claim.context_description }} on {{ cr.claim.claimed_on }})
+              </cite>
+            </footer>
+          </blockquote>
+          <div class="row justify-content-center">
+            <div class="col-sm-6 col-md-10 col-lg-8">
+              <img
+                class='rating-icon mx-md-auto'
+                src="{{ cr.rating.image.url }}"
+                alt="{{ cr.rating.label }} icon"
+              >
+            </div>
+            <div class="rating-label col-md-10 {{ cr.rating.css_class }}">{{ cr.rating.label }}
+            </div>
+          </div>
+          <p class="rating-summary">{{ cr.summary }}</p>
         </div>
-        <div class="col-7 col-lg-12 order-3 order-lg-4 rating-summary-label">
-          <h3 class="rating-label {{ cr.rating.css_class }}">{{ cr.rating }}</h3>
-          <p class="rating-summary">{{ cr.summary }} <span class='read-more'>Read more >>></span></p>
-        </div>
-        <div class="col-5 col-lg-3 emoji order-4 order-lg-3">
-          {% if cr.rating.label == "True" %}
-          {{ cr.rating.emojis }}{{ skin_tone }}&#xfe0f;
+        </a>
+        <footer class="review-item-footer text-muted">
+          <small>Published 
+          {% if cr.published_within_last_24_hours %}
+            {{ cr.published_on | naturaltime }}
           {% else %}
-          {{ cr.rating.emojis }}{{ skin_tone }}&zwj;{{ gender }}&#xfe0f;
+            {{ cr.published_on | naturalday }}
           {% endif %}
-        </div>
+          </small>
+        </footer>
       </div>
-      </a>
     {% endfor %}
+    </div>
   {% else %}
     <div class="row">
       <div class="col-12">
@@ -70,4 +81,4 @@
   {% endif %}
 </div>
 
-{% endblock %}
+{% endblock content %}

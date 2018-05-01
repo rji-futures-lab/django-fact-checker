@@ -1,9 +1,21 @@
 {% extends 'factchecker/base.html' %}
 {% load markdown_deux_tags emoji_tags %}
 
+{% block head %}
+  {{ block.super }}
+  {# {% include 'factchecker/claimreview_schema.html' %} #}
+{% endblock head %}
+
+{% block title %}{{ claim_review.claim }}{% endblock title %}
+
+{% block description %}
+  {{ claim_review.rating.label }}: {{ claim_review.summary }}
+{% endblock description %}
+
+{% block og_type %}article{% endblock og_type %}
+
 {% block content %}
-<div class="container">
-<div class="row">
+<div class="container mx-5 px-5 mt-4">
   {% if claimreview.claim.source.image %}
   <div class="col-12 col-md-4">
     <img
@@ -13,34 +25,36 @@
     >
   </div>
   {% endif %}
-  <div class="col-12 col-md-8 claim-detail">
+  <blockquote class="blockquote mb-6">
     <h2>{{ claimreview.claim.summary }}</h2>
-    <p class="context">- {{ claimreview.claim.source }}<br>
-    {% if claimreview.claim.context_url %}
-      <a href="{{ claimreview.claim.context_url }}" target="_blank">{{ claimreview.claim.context_description }} ({{ claimreview.claim.claimed_on }})</a>
-    {% else %}
-      {{ claimreview.claim.context_description }} ({{ claimreview.claim.claimed_on }})
-    {% endif %}
-    </p>
+    <footer class="blockquote-footer">{{ claimreview.claim.source.name }}<br>
+      <cite title="Context">
+        {% if claimreview.claim.context_url %}
+          <a href="{{ claimreview.claim.context_url }}" target="_blank">
+          ({{ claimreview.claim.context_description }} on {{ claimreview.claim.claimed_on }})
+          </a>
+        {% else %}
+          ({{ claimreview.claim.context_description }} on {{ claimreview.claim.claimed_on }})
+        {% endif %}
+      </cite>
+    </footer>
+  </blockquote>
+  <div class="row justify-content-center">
+    <div class="col-sm-6 col-md-5 col-lg-4">
+      <img
+        class='rating-icon mx-md-auto'
+        src="{{ claimreview.rating.image.url }}"
+        alt="{{ claimreview.rating.label }} icon"
+      >
+    </div>
+    <div class="rating-label col-md-10 mb-3 {{ claimreview.rating.css_class }}">{{ claimreview.rating.label }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      {{ claimreview.body|markdown }}
+    </div>
   </div>
 </div>
-<div class="row rating">
-  <div class="col-12">
-    <h2 class="rating-label-detail {{ claimreview.rating.css_class }}">{{ claimreview.rating.label }}</h2>
-    <h2 class='emoji'>
-      {% if claimreview.rating.label == "True" %}
-      {{ claimreview.rating.emojis|randomize_skin_tone }}
-      {% else %}
-      {{ claimreview.rating.emojis|randomize_gender_and_skin_tone }}
-      {% endif %}
-    </h2>
-    <h5>{{ claimreview.summary }}</h5>
-  </div>
-</div>
-<div class="row">
-  <div class="col-12">
-    {{ claimreview.body_or_lipsum|markdown }}
-  </div>
-</div>
-</div>
-{% endblock %}
+
+{% endblock content %}

@@ -90,31 +90,51 @@ or ???? https://dribbble.com/shots/4378719-DiOB-Survey
     color: #E98820;
 }
 
-.source-name {
+.review-item-box {
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    -moz-box-shadow:    0px 0px 5px 0px #ccc;
+    -webkit-box-shadow: 0px 0px 5px 0px #ccc;
+    box-shadow:         0px 0px 5px 0px #ccc;
+}
+
+.review-item-box:hover {
+    border: 1px solid #329BB1;
+    border-radius: .25rem;
+    -moz-box-shadow:    0px 0px 5px 0px #329BB1;
+    -webkit-box-shadow: 0px 0px 5px 0px #329BB1;
+    box-shadow:         0px 0px 5px 0px #329BB1;
+}
+
+.review-item-link {
+    text-decoration: none;
+    color: black;
+}
+
+.review-item-link:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.blockquote {
+    font-weight: bold;
+}
+
+.blockquote-footer {
     text-transform: uppercase;
     font-weight: bold;
+    text-align: right;
 }
 
-.claim-review-item {
-    border-radius: 25px;
-    padding: 10px;
-    color: black;
-    border: 2px solid #ABDBE8;
+.blockquote-footer cite {
+    font-weight: normal;
+    text-transform: none;
 }
 
-.claim-review-item:hover {
-    border: 5px solid #329BB1;
-    padding: 7px;
-}
-
-.claim-review-item:hover .read-more {
-    color: #0077B8;
-}
-
-.read-more {
-    color: #329BB1;
-    font-weight: bold;
-}
+/*.blockquote-footer a {
+    text-transform: none;
+    font-weight: normal;
+}*/
 
 .rating {
     text-align: center;
@@ -122,6 +142,23 @@ or ???? https://dribbble.com/shots/4378719-DiOB-Survey
     padding: 20px 0px 10px 0px;
     background-color: #ABDBE8;
     border-radius: 25px;
+}
+
+/*.rating-icon {
+    max-width: 50%;
+}*/
+
+.review-item-body {
+    margin-bottom: 40px; 
+}
+
+.review-item-footer {
+    padding: .75rem 1.25rem;
+    background-color: rgba(0,0,0,.03);
+    border-top: 1px solid rgba(0,0,0,.125);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 body {
@@ -141,12 +178,14 @@ body {
 }
 
 .rating-summary {
-    text-align: center;
+    text-align: left;
 }
 
 .rating-label, .rating-label-detail {
     text-transform: uppercase;
     font-weight: bold;
+    text-align: center;
+    font-size: 2rem;
     text-align: center;
 }
 
@@ -165,9 +204,6 @@ body {
 @media (max-width: 576px) {
     .image-wrapper {
         display: none;
-    }
-    .rating-summary, .rating-label {
-        text-align: left;
     }
     .emoji {
         font-size: 4em;
@@ -207,9 +243,9 @@ body {
     .emoji {
         font-size: 5em;
     }
-    .rating-summary, .rating-label {
+/*    .rating-summary {
         text-align: left;
-    }
+    }*/
     .claim-detail h2 {
         font-size: 26px;
     }
@@ -222,9 +258,9 @@ body {
     .state-container {
         display: unset;
     }
-    .rating-summary, .rating-label {
+/*    .rating-summary, .rating-label {
         text-align: center;
-    }
+    }*/
     .title-sm {
         display: none;
     }
@@ -269,10 +305,10 @@ body {
     }
 }
 
-.source-img {
+.source-image {
     max-width: 100%;
     max-height: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .about h1, .tips h1 {
@@ -286,13 +322,15 @@ body {
 
 .about .rating-label {
     font-size: 2em;
+    text-align: left;
+    padding-top: 1.5rem;
 }
 
 .definition {
     margin-bottom: 40px;
 }
 
-footer {
+.site-footer {
     text-align: center;
     padding-top: 40px;
     padding-bottom: 40px;
@@ -305,7 +343,7 @@ footer {
     font-size: .857em;
 }
 
-footer a {
+.site-footer a {
     text-decoration: underline;
     color: #FCFCFC;
 }
@@ -358,4 +396,23 @@ form .btn-group {
 
 #form-btns {
     text-align: center;
+}
+
+
+/*fitzpatrick scale*/
+
+.light-skin-tone {
+    fill: #fadcbc;    
+}
+.medium-light-skin-tone {
+    fill: #e0bb95;
+}
+.medium-skin-tone {
+    fill: #bf8f68;
+}
+.medium-dark-skin-tone {
+    fill: #9b643d;
+}
+.dark-skin-tone {
+    fill: #594539;
 }

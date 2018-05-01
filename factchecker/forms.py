@@ -1,7 +1,8 @@
-from bootstrap_datepicker.widgets import DatePicker
 from django import forms
+from django.core.exceptions import ValidationError
+from bootstrap_datepicker.widgets import DatePicker
 from phonenumber_field.formfields import PhoneNumberField
-from .models import ClaimSource
+from .models import ClaimSource, ClaimSubmitter
 
 
 class ClaimForm(forms.Form):
@@ -65,11 +66,11 @@ class ClaimForm(forms.Form):
         help_text='We prefer direct quotes. Otherwise, please accurately '
                   'paraphrase what was said.',
     )
-    extra = forms.CharField(
+    note = forms.CharField(
         required=False,
         label='Extra info',
         help_text='If you can, tell us more about how this was said and what it '
-                  'means, if you can.',
+                  'means.',
         widget=forms.Textarea,
     )
     submitter_name = forms.CharField(
@@ -88,30 +89,65 @@ class ClaimForm(forms.Form):
         help_text='If you prefer we reach you by email.',
     )
 
+    @property
+    def submitter_field_names(self):
+        """
+        Return a tuple containing the list of ClaimSubmitter fields.
+        """
+        return (k for k in self.fields.keys() if "submitter_" in k)
+
+    @property
+    def has_submitter_data(self):
+        """
+        Return True of ClaimSubmitter data was submitted through the form.
+        """
+
+        if (
+            bool(self.data['submitter_name']) or
+            bool(self.data['submitter_phone']) or
+            bool(self.data['submitter_email'])
+        ):
+            return True
+        else:
+            return False
 
     def clean(self):
-        cleaned_data = super().clean()
+        cleaned_data = super(ClaimForm, self).clean()
 
-        has_source_selected = bool(self.cleaned_data.get("source"))
-        has_source_type = bool(self.cleaned_data.get("source_type"))
-        has_source_name = bool(self.cleaned_data.get("source_name"))
-        
-        if not has_source_selected:
-            msg = "This field is required when adding a new source."
+        if not bool(cleaned_data.get("source")):
+            source = ClaimSource(
+                source_type=cleaned_data.get("source_type"),
+                name=cleaned_data.get("source_name"),
+                title=cleaned_data.get("source_title"),
+            )
+            source.full_clean()
 
-            if not has_source_type:
-                self.add_error("source_type", msg)
-                
-            if not has_source_name:
-                self.add_error("source_name", msg)
-            
-            del self.errors['source']
+            cleaned_data['source'] = source
 
-        has_submitter_name = bool(self.cleaned_data.get("submitter_name"))
-        has_submitter_email = bool(self.cleaned_data.get("submitter_email"))
-        has_submitter_phone = bool(self.cleaned_data.get("submitter_phone"))
+        if self.has_submitter_data:
+            cleaned_data['submitter'] = self._submitter(
+                cleaned_data.get("submitter_name"),
+                cleaned_data.get("submitter_email"),
+                cleaned_data.get("submitter_phone"),
+            )
+        else:
+            cleaned_data['submitter'] = None
 
-        if has_submitter_email or has_submitter_phone:
-            if not has_submitter_name:
-                msg = "Name is required with contact info."
-                self.add_error("submitter_name", msg)                
+        return cleaned_data
+
+    def _clean_submitter_data(self, name, email, phone):
+        try:
+            submitter = ClaimSubmitter.objects.get(
+                name=name, email=email, phone=phone,
+            )
+        except ClaimSubmitter.DoesNotExist:
+            submitter = ClaimSubmitter(
+                name=name, email=email, phone=phone,
+            )
+            try:
+                submitter.full_clean()
+            except ValidationError as err:
+                # TODO: override the field names 
+                raise ValidationError
+
+        return submitter

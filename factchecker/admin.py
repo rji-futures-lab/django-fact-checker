@@ -47,6 +47,7 @@ class ClaimRatingAdmin(admin.ModelAdmin):
         'emojis',
         'definition',
         'sort_order',
+        'image',
     )
 
 
@@ -61,7 +62,6 @@ class ClaimReviewAdmin(MarkdownxModelAdmin):
         'summary',
         'published_on',
     )
-    
 
 
 @admin.register(ClaimSource)
