@@ -91,6 +91,21 @@ class ClaimRating(models.Model):
         """
         return "%s-color" % self.label.replace(" ", "-").lower()
 
+    @property
+    def svg_url(self):
+        url_template = 'factchecker/img/thumbs/{}.svg'
+        if self.sort_order == 1:
+            url = url_template.format('up')
+        elif self.sort_order == 2:
+            url = url_template.format('half-up')
+        elif self.sort_order == 3:
+            url = url_template.format('neutral')
+        elif self.sort_order == 4:
+            url = url_template.format('half-down')
+        elif self.sort_order == 5:
+            url = url_template.format('down')
+
+        return url
 
 class Claim(models.Model):
     source = models.ForeignKey(
