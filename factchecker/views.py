@@ -1,7 +1,6 @@
 from random import randint
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, render, HttpResponseRedirect
 from django.utils import timezone
 from django.utils.decorators import method_decorator
@@ -46,7 +45,7 @@ class ComingSoonView(TemplateView):
 
 
 @method_decorator(decorators, name='dispatch')
-class PublishedClaimReviewListView(LoginRequiredMixin, ListView):
+class PublishedClaimReviewListView(ListView):
     """
     Renders a list of published claim reviews.
     """
@@ -54,11 +53,10 @@ class PublishedClaimReviewListView(LoginRequiredMixin, ListView):
     queryset = ClaimReview.objects.filter(
         published_on__lte=timezone.now()
     ).order_by('-published_on')
-    login_url = '/coming-soon/'
 
 
 @method_decorator(decorators, name='dispatch')
-class PublishedClaimReviewDetailView(LoginRequiredMixin, DetailView):
+class PublishedClaimReviewDetailView(DetailView):
     """
     Renders details of a published claim review.
     """
@@ -66,17 +64,15 @@ class PublishedClaimReviewDetailView(LoginRequiredMixin, DetailView):
     queryset = ClaimReview.objects.filter(
         published_on__lte=timezone.now()
     )
-    login_url = '/coming-soon/'
 
 
 @method_decorator(decorators, name='dispatch')
-class ClaimRatingListView(LoginRequiredMixin, ListView):
+class ClaimRatingListView(ListView):
     """
     Renders the about page.
     """
 
     model = ClaimRating
-    login_url = '/coming-soon/'
 
 
 @method_decorator(decorators, name='dispatch')
