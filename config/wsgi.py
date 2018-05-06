@@ -1,20 +1,16 @@
 """
-WSGI config for mysite project.
+WSGI config for factchecker project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/2.0/howto/deployment/wsgi/
 """
 
 import os
+from pathlib import Path
 from django.core.wsgi import get_wsgi_application
-from os.path import join, dirname
-from dotenv import load_dotenv
 
-dotenv_path = join(dirname(dirname(__file__)), '.env')
-load_dotenv(dotenv_path, verbose=True)
-
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
+# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
+# ^^^ Django's out-of-the-box configuration ^^^
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.prod")
+# ^^^ customization ensures that deploys default to prod settings ^^^
 
 application = get_wsgi_application()

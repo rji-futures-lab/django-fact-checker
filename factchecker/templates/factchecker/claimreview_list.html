@@ -4,22 +4,32 @@
 
 {% block content %}
 
-<div class="jumbotron">
+<div class="jumbotron mb-1">
   <div class="container">
     <div class="row">
-      <a href='/' class='col-12 col-md-4 state-container'>
-        <div class='col-12 col-md-8 title'>
-          <h1 class="display-4"><span class="yellow-font">Missouri Education</span> Fact Checker</h1>
-          <p class="lead">{{ CUSTOM_WEBSITE_DESCRIPTION }}</p>
-        </div>
-        <div class="col-12">
-          <p class="lead title-sm">{{ CUSTOM_WEBSITE_DESCRIPTION }}</p>
-        </div>
-      </a>
+      <div class='col-12 col-md-4 state-container'>
+        <img
+          id='state-sil'
+          src="{% static 'factchecker/img/missouri-map-silhouette.svg' %}"
+          alt="Silhouette of State of Missouri"
+        >
+      </div>
+      <div class='col-12 col-md-8 title'>
+        <h1 class="display-4"><span class="yellow-font">Missouri Education</span> Fact Checker</h1>
+        <p class="lead">{{ CUSTOM_WEBSITE_DESCRIPTION }}</p>
+      </div>
+      <div class="col-12">
+        <p class="lead title-sm">{{ CUSTOM_WEBSITE_DESCRIPTION }}</p>
+      </div>
     </div>
   </div>
 </div>
 <div class="container">
+  <div class="row mb-3 justify-content-center">
+    <div class="col-10 px-2 py-2">
+      This is an experiment built by the RJI Futures Lab. If you like what you see and want to learn more about how we built this, check out our GitHub <a href="https://github.com/rji-futures-lab/django-fact-checker">repo</a>.
+    </div>
+  </div>
   {% if claimreview_list %}
     <div class="row justify-content-around">
     {% for cr in claimreview_list %}

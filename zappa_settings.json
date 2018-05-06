@@ -1,7 +1,7 @@
 {
     "dev": {
         "aws_region": "us-east-2",
-        "django_settings": "mysite.settings",
+        "django_settings": "config.settings.prod",
         "profile_name": "rji",
         "project_name": "fact-checker",
         "runtime": "python3.6",
@@ -13,8 +13,8 @@
             "appnope*", "parso*", "pexpect*", "ptyprocess*",
             "pickleshare*", "prompt-toolkit*", "wcwidth*", "pygments*",
             "simplegeneric*", "traitlets*", "colorama*", "settings_local.py",
-            "sqlite.db", ".python-version", "requirements-dev.txt", "README.md",
-            "factchecker/static/"
+            "sqlite*.db", ".python-version", "requirements-dev.txt", "README.md",
+            "static", "media", 
         ],
     }
 }
