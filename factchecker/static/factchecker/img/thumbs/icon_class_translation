@@ -1,0 +1,130 @@
+
+simpsons: #f4e910
+          #efe215
+
+          #ee9821
+
+
+"light-skin-tone"
+  skin: "#fadcbc"
+
+"medium-light-skin-tone"
+  skin: "#e0bb95"
+  shaded: "986840"
+
+"medium-skin-tone"
+  "#bf8f68"
+
+"medium-dark-skin-tone"
+  "#9b643d"
+
+"dark-skin-tone"
+  "#594539"
+
+
+down
+  .skin{fill:#f4e910;}
+    .cls-4{fill:#f4e910;}
+    .cls-7{fill:#efe215;}
+  
+  .glare{fill:#fbfbf9;}
+    .cls-5{fill:#fff;}
+  
+  .shaded{fill:#ee9821;}
+    .cls-6{fill:#ee9821;}
+  
+  .shadow-purple{fill:#9a67a5;}
+    .cls-1{fill:#9a67a5;}
+  
+  .shadow-gray{fill:#86766a;}
+    .cls-3{fill:#86766a;}
+  
+  .outline{fill:#090c0b;}
+    .cls-2{fill:#090c0b;}
+
+
+half-down
+  .skin{fill:#f4e910;}
+    .cls-5{fill:#f4e910;}
+  
+  .glare{fill:#fbfbf9;}
+    .cls-4{fill:#fff;}
+  
+  .shaded{fill:#ee9821;}
+    .cls-6{fill:#ee9821;}
+  
+  .shadow-purple{fill:#9a67a5;}
+    .cls-1{fill:#9a67a6;}
+  
+  .shadow-gray{fill:#86766a;}
+    .cls-3{fill:#86766a;}
+  
+  .outline{fill:#090c0b;}
+    .cls-2{fill:#090c0b;}
+
+
+half-up
+  .skin{fill:#f4e910;}
+    .cls-7{fill:#f4e910;}
+    .cls-8{fill:#efe215;}
+  
+  .glare{fill:#fbfbf9;}
+    .cls-9{fill:#fbfbf9;}
+  
+  .shaded{fill:#ee9821;}
+    .cls-6{fill:#ee9821;}
+
+  .shadow-purple{fill:#9a67a5;}
+    .cls-1{fill:#9972a2;}
+    .cls-2{fill:#9a67a5;}
+    .cls-4{fill:#9a67a6;}
+  
+  .shadow-gray{fill:#86766a;}
+    .cls-5{fill:#86766a;}
+  
+  .outline{fill:#090c0b;}
+    .cls-3{fill:#090c0b;}
+
+
+neutral
+  .skin{fill:#f4e910;}
+    .cls-6{fill:#f4e910;}
+    .cls-7{fill:#efe215;}
+  
+  .glare{fill:#fbfbf9;}
+    .cls-8{fill:#fbfbf9;}
+
+  .shaded{fill:#ee9821;}
+    .cls-5{fill:#ee9821;}
+  
+  .shadow-purple{fill:#9a67a5;}
+    .cls-3{fill:#9a67a6;}
+    .cls-1{fill:#9a67a5;}
+  
+  .shadow-gray{fill:#86766a;}
+    .cls-4{fill:#86766a;}
+  
+  .outline{fill:#090c0b;}
+    .cls-2{fill:#090c0b;}
+
+up
+  .skin{fill:#f4e910;}
+    .cls-6{fill:#f4e910;}
+    .cls-9{fill:#efe215;}
+  
+  .glare{fill:#fbfbf9;}
+    .cls-8{fill:#fbfbf9;}
+  
+  .shaded{fill:#ee9821;}
+    .cls-7{fill:#ee9821;}
+  
+  .shadow-purple{fill:#9a67a5;}
+    .cls-1{fill:#9a67a5;}
+    .cls-3{fill:#9a67a6;}
+    .cls-4{fill:#9972a2;}
+  
+  .shadow-gray{fill:#86766a;}
+    .cls-5{fill:#86766a;}
+  
+  .outline{fill:#090c0b;}
+    .cls-2{fill:#090c0b;}

@@ -4,8 +4,8 @@ Custom factchecker Django project settings for the production environment.
 from .base import * # noqa
 
 ALLOWED_HOSTS = [
-    '1q4j4c7dbh.execute-api.us-east-2.amazonaws.com',
-    'factchecker.rjifuture.org',
+    '.execute-api.us-east-2.amazonaws.com',
+    '.rjifuture.org',
 ]
 
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")

@@ -1,8 +1,15 @@
-python-dotenv
-django
+django<2.2
+django-dotenv
 django-storages
 zappa
 zappa-django-utils
 Pillow
 django-markdownx
 django-markdown-deux
+django-bootstrap4
+django-bootstrap-datepicker-plus
+django-phonenumber-field
+phonenumbers
+boto3==1.9.80
+botocore==1.12.80
+s3transfer==0.1.13

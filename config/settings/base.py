@@ -3,10 +3,6 @@ Settings for the factchecker Django project that apply in any environment.
 """
 import os
 from pathlib import Path
-import dotenv
-
-dotenv_file_path = Path(__file__).resolve().parent.parent.parent / '.env'
-dotenv.read_dotenv(dotenv_file_path)
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -27,7 +23,7 @@ INSTALLED_APPS = [
     'markdownx',
     'markdown_deux',
     'bootstrap4',
-    'bootstrap_datepicker',
+    'bootstrap_datepicker_plus',
     'phonenumber_field',
     'factchecker',
 ]

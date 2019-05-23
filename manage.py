@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 import os
 import sys
+import dotenv
 
 if __name__ == "__main__":
-    
+    dotenv.read_dotenv()
     # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
     # ^^^ Django's out-of-the-box configuration ^^^
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.local")

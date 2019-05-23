@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from bootstrap_datepicker.widgets import DatePicker
+from bootstrap_datepicker_plus import DatePickerInput
 from phonenumber_field.formfields import PhoneNumberField
 from .models import ClaimSource, ClaimSubmitter
 
@@ -34,7 +34,7 @@ class ClaimForm(forms.Form):
     claimed_on = forms.DateField(
         required=False,
         label='Claimed on',
-        widget=DatePicker(
+        widget=DatePickerInput(
             options={
                 'todayBtn': "linked",
                 'clearBtn': False,
@@ -125,11 +125,13 @@ class ClaimForm(forms.Form):
             cleaned_data['source'] = source
 
         if self.has_submitter_data:
-            cleaned_data['submitter'] = self._submitter(
-                cleaned_data.get("submitter_name"),
-                cleaned_data.get("submitter_email"),
-                cleaned_data.get("submitter_phone"),
+            submitter = ClaimSubmitter(
+                name=cleaned_data.get("submitter_name"),
+                email=cleaned_data.get("submitter_email"),
+                phone=cleaned_data.get("submitter_phone"),
             )
+            submitter.full_clean()
+            cleaned_data['submitter'] = submitter
         else:
             cleaned_data['submitter'] = None
 
