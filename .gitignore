@@ -50,3 +50,4 @@ sqlite.db
 settings_local.py
 django.log
 factchecker/media/
+zappa_settings.json
